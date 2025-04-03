@@ -4,10 +4,6 @@ from models.user import User
 user_bp = Blueprint("user", __name__)
 
 # Beispiel-Daten
-users = [
-    User(1, "Alice", "alice@example.com"),
-    User(2, "Bob", "bob@example.com"),
-]
 
 @user_bp.route("/")
 def get_users():
