@@ -1,10 +1,20 @@
-from flask import Blueprint, jsonify
-from models.user import User
+from flask import request, redirect, url_for, flash, session
+from services.authentification_service import login_user
 
-user_bp = Blueprint("user", __name__)
+def einloggen():
+    email = request.form.get('email')
+    password = request.form.get('password')
 
-# Beispiel-Daten
+    if not email or not password:
+        flash("E-Mail und Passwort erforderlich", "danger")
+        return redirect(url_for('show_login_form'))
 
-@user_bp.route("/")
-def get_users():
-    return jsonify([{"id": u.id, "name": u.name, "email": u.email} for u in users])
+    auth_result = login_user(email, password)
+
+    if auth_result:
+        session['user_email'] = auth_result['email']  # ✅ speichern für später
+        flash("Login erfolgreich!", "success")
+        return redirect(url_for('homepage'))
+    else:
+        flash("Login fehlgeschlagen", "danger")
+        return redirect(url_for('show_login_form'))
