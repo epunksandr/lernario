@@ -1,86 +1,131 @@
-{% extends "layout.html" %}
+{% extends "components/layout.html" %}
+
+{% include "components/header.html" %}
 
 {% block content %}
-<nav class="navbar py-3 navbar-expand-lg bg-white">
-    <div class="container">
-        <a class="navbar-brand fs-3 fw-medium me-5" href="/">lernar<span class="text-primary">io</span></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-underline me-auto mb-2 mb-lg-0">
-                <li class="" href="#">
-                    <a class="nav-link" href="#">Kalender</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Schüler" aria-label="Schüler">
-                <button class="btn btn-outline-primary" type="submit">Suchen</button>
-            </form>
-        </div>
-    </div>
-</nav>
 
-<div class="container mt-4">
-    <p class="text-secondary mt-5 mb-2">Mittwoch, 9. April </p>
+<div class="container py-4">
+    <p class="text-secondary mt-4 mb-2">Mittwoch, 9. April </p>
     <h1 class="mb-5">Hallo, Alex</h1>
     <div class="row g-4">
-        <h3>Deine Klassen</h2>
         <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title fs-4">IFA4C</h5>
-                    <div class="d-flex"></div>
-                    <p class="card-text">1. Lernjahr</p>
-                    <a href="#" class="btn btn-outline-primary me-1">Schüler</a>
-                    <a href="#" class="btn btn-outline-primary">Termine</a>
-                </div>
+            <div class="card p-3">
+                <h6 class="card-title">Klassen</h6>
+                <p class="card-text fs-4">4</p>
+                <a href="{{ url_for('klassen') }}" class="btn btn-outline-primary btn-sm">Verwalten</a>
             </div>
         </div>
-
         <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title fs-4">IFA2C</h5>
-                    <div class="d-flex"></div>
-                    <p class="card-text">3. Lernjahr</p>
-                    <a href="#" class="btn btn-outline-primary me-1">Schüler</a>
-                    <a href="#" class="btn btn-outline-primary">Termine</a>
-                </div>
+            <div class="card p-3">
+                <h6 class="card-title">Schüler</h6>
+                <p class="card-text fs-4">102</p>
+                <a href="{{ url_for('schueler') }}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
             </div>
         </div>
-
         <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title fs-4">IFA1B</h5>
-                    <div class="d-flex"></div>
-                    <p class="card-text">1. Lernjahr</p>
-                    <a href="#" class="btn btn-outline-primary me-1">Schüler</a>
-                    <a href="#" class="btn btn-outline-primary">Termine</a>
-                </div>
+            <div class="card p-3">
+                <h6 class="card-title">Nächster Termin</h6>
+                <p class="card-text">Mathe-Arbeit<br>12. April 2025</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Kalender</a>
             </div>
         </div>
-
         <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title fs-4">IFA3A</h5>
-                    <div class="d-flex"></div>
-                    <p class="card-text">2. Lernjahr</p>
-                    <a href="#" class="btn btn-outline-primary me-1">Schüler</a>
-                    <a href="#" class="btn btn-outline-primary">Termine</a>
-                </div>
+            <div class="card p-3">
+                <h6 class="card-title">Klassenschnitt</h6>
+                <p class="card-text fs-4">2,4</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Details</a>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function toggle() {
-        document.getElementById("nav-link").classList.toggle("text-black");
-    }
-</script>
+    <!-- Aktivitäten -->
+    <div class="mt-5">
+        <h5 class="mb-3">Letzte Aktivitäten</h5>
+        <ul class="list-group">
+            <li class="list-group-item">Note für Max Müller (3,0 in Deutsch) vergeben</li>
+            <li class="list-group-item">Neue Klasse "9b" erstellt</li>
+            <li class="list-group-item">Termin "Elternabend 10a" eingetragen</li>
+        </ul>
+    </div>
+
+    <div class="mt-5">
+        <h5 class="mb-3">Abwesenheiten – Diese Woche</h5>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Max Müller – 2 Tage</span>
+                <span class="text-muted">10a</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Sarah Braun – 1 Tag</span>
+                <span class="text-muted">9a</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Top Schüler -->
+    <div class="mt-5">
+        <h5 class="mb-3">Top 3 Schüler – Bester Notenschnitt</h5>
+        <table class="table table-sm table-bordered bg-white">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Klasse</th>
+                    <th>Ø Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Anna König</td>
+                    <td>10a</td>
+                    <td>1,3</td>
+                </tr>
+                <tr>
+                    <td>Leo Baum</td>
+                    <td>9b</td>
+                    <td>1,5</td>
+                </tr>
+                <tr>
+                    <td>Selin Yildiz</td>
+                    <td>8c</td>
+                    <td>1,7</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Abwesenheiten -->
+
+    <!-- Termine -->
+    <div class="mt-5">
+        <h5 class="mb-3">Bevorstehende Termine</h5>
+        <table class="table table-sm table-hover bg-white">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Termin</th>
+                    <th>Klasse</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12.04.2025</td>
+                    <td>Mathearbeit</td>
+                    <td>10a</td>
+                </tr>
+                <tr>
+                    <td>15.04.2025</td>
+                    <td>Elternabend</td>
+                    <td>9b</td>
+                </tr>
+                <tr>
+                    <td>18.04.2025</td>
+                    <td>Ausflug</td>
+                    <td>8c</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 {% endblock %}

@@ -1,0 +1,38 @@
+<nav class="navbar py-3 navbar-expand-lg bg-white">
+    <div class="container">
+        <a class="navbar-brand fs-3 fw-medium me-4" href="{{ url_for('homepage') }}">lernar<span
+                class="text-primary">ío</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav me-auto mb-lg-0">
+                <li>
+                    <a href="{{ url_for('klassen') }}"
+                        class="nav-link link-secondary{% if active_page == 'klassen' %}active {% endif %}">
+                        Klassen
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('schueler') }}"
+                        class="nav-link link-secondary{% if active_page == 'schueler' %}active {% endif %}">
+                        Schüler
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('noten') }}"
+                        class="nav-link link-secondary{% if active_page == 'noten' %}active {% endif %}">Noten</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('kalender') }}"
+                        class="nav-link link-secondary{% if active_page == 'kalender' %}active {% endif %}">Kalender</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Schüler, Klasse" aria-label="Schüler">
+                <button class="btn btn-outline-primary" type="submit">Suchen</button>
+            </form>
+        </div>
+    </div>
+</nav>

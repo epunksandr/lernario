@@ -12,8 +12,7 @@ def einloggen():
     auth_result = login_user(email, password)
 
     if auth_result:
-        session['user_email'] = auth_result['email']  # ✅ speichern für später
-        flash("Login erfolgreich!", "success")
+        session['user_email'] = auth_result['email'] 
         return redirect(url_for('homepage'))
     else:
         flash("Login fehlgeschlagen", "danger")
