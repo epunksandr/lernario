@@ -1,5 +1,8 @@
 from flask import Flask, render_template
 from controllers.user_controller import einloggen
+from controllers.class_controller import add_new_class
+from controllers.class_controller import get_all_classes_with_students_count
+from controllers import class_controller
 
 app = Flask(__name__, template_folder="templates")
 app.secret_key = 'supergeheim123' 
@@ -22,10 +25,9 @@ def homepage():
 
 @app.route('/klassenverwaltung')
 def klassen():
-    klassen_liste = [
-        {"id": 1, "name": "10A", "schuelerzahl": 27},
-        {"id": 2, "name": "9A", "schuelerzahl": 29}
-    ]
+    klassen_liste = get_all_classes_with_students_count()
+
+    print(klassen_liste)
 
     return render_template('klassenverwaltung.html', klassen_liste=klassen_liste, active_page="klassen")
 
@@ -52,6 +54,15 @@ def noten():
 @app.route('/kalender')
 def kalender():
     return render_template('kalender.html', active_page="kalender")
+
+@app.route('/neue_klasse', methods=['POST'])
+def neue_klasse():
+    return add_new_class()
+
+
+#@app.route('/loeschen/<int:klasse_id>', methods=['GET', 'POST'])
+#def loeschen(klasse_id):
+#    class_controller.loeschen(klasse_id)
 
 
 if __name__ == '__main__':
