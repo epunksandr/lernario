@@ -23,12 +23,12 @@
             <tbody>
                 {% for klasse in klassen_liste %}
                 <tr>
-                    <td>{{ klasse.id }}</td>
-                    <td>{{ klasse.name }}</td>
-                    <td>{{ klasse.schuelerzahl }}</td>
+                    <td>{{ klasse.class_id }}</td>
+                    <td>{{ klasse.classname }}</td>
+                    <td>{{ klasse.student_count }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
-                        <a href="#" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        <a href="{{ url_for('bearbeiten', klasse_id=klasse.class_id) }}" class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
+                        <a href="{{ url_for('loeschen', klasse_id=klasse.class_id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -41,7 +41,7 @@
 <div class="modal fade" id="klasseModal" tabindex="-1" aria-labelledby="klasseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="/neue_klasse" method="post" >
                 <div class="modal-header">
                     <h5 class="modal-title" id="klasseModalLabel">Neue Klasse hinzufügen</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
@@ -49,7 +49,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="klassenname" class="form-label">Klassenname</label>
-                        <input type="text" class="form-control" id="klassenname" placeholder="z. B. 9c">
+                        <input type="text" class="form-control" id="klassenname" name="klassenname" placeholder="z. B. 9c">
                     </div>
                 </div>
                 <div class="modal-footer">
