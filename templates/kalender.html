@@ -4,6 +4,55 @@
 
 {% block content %}
 
-Kalender
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Terminübersicht</h3>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#klasseModal">+ Termin hinzufügen</button>
+    </div>
+
+    <div class="list-group">
+
+        <div class="list-group-item list-group-item-action mb-2 shadow-sm">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1">Deutsch Klassenarbeit</h5>
+                <small class="text-muted">2025-04-15</small>
+            </div>
+            <p class="mb-1">Grammatik & Aufsatz – bitte Schreibsachen mitbringen.</p>
+            <small class="text-secondary">📚 Klasse: 8A</small>
+            <div class="mt-2 d-flex gap-2">
+                <a href="#" class="btn btn-sm btn-outline-warning">Bearbeiten</a>
+                <a href="#" class="btn btn-sm btn-outline-danger">Löschen</a>
+            </div>
+        </div>
+
+        <div class="list-group-item list-group-item-action mb-2 shadow-sm">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1">Wandertag</h5>
+                <small class="text-muted">2025-04-20</small>
+            </div>
+            <p class="mb-1">Gemeinsamer Ausflug zum Stadtpark mit Picknick.</p>
+            <small class="text-secondary">📚 Klasse: 7C</small>
+            <div class="mt-2 d-flex gap-2">
+                <a href="#" class="btn btn-sm btn-outline-warning">Bearbeiten</a>
+                <a href="#" class="btn btn-sm btn-outline-danger">Löschen</a>
+            </div>
+        </div>
+
+        <div class="list-group-item list-group-item-action mb-2 shadow-sm">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1">Elternsprechtag</h5>
+                <small class="text-muted">2025-04-25</small>
+            </div>
+            <p class="mb-1">Bitte Zeitfenster online buchen. Findet im Hauptgebäude statt.</p>
+            <small class="text-secondary">📚 Klassen: Alle</small>
+            <div class="mt-2 d-flex gap-2">
+                <a href="#" class="btn btn-sm btn-outline-warning">Bearbeiten</a>
+                <a href="#" class="btn btn-sm btn-outline-danger">Löschen</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

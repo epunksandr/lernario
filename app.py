@@ -24,7 +24,9 @@ def homepage():
 def klassen():
     klassen_liste = [
         {"id": 1, "name": "10A", "schuelerzahl": 27},
-        {"id": 2, "name": "9A", "schuelerzahl": 29}
+        {"id": 2, "name": "9A", "schuelerzahl": 29},
+        {"id": 3, "name": "10B", "schuelerzahl": 23},
+        {"id": 4, "name": "9B", "schuelerzahl": 24}
     ]
 
     return render_template('klassenverwaltung.html', klassen_liste=klassen_liste, active_page="klassen")
