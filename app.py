@@ -4,8 +4,8 @@ from controllers.user_controller import einloggen
 app = Flask(__name__, template_folder="templates")
 app.secret_key = 'supergeheim123' 
 
-@app.route('/')
-def showRegister():
+@app.route('/', methods=['GET'])
+def show_register():
     return render_template('register.html')
 
 @app.route('/login', methods=['GET'])
