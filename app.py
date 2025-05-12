@@ -1,3 +1,5 @@
+from urllib import request
+
 from flask import Flask, render_template
 from controllers.user_controller import einloggen
 from controllers.class_controller import add_new_class
@@ -60,9 +62,23 @@ def neue_klasse():
     return add_new_class()
 
 
-#@app.route('/loeschen/<int:klasse_id>', methods=['GET', 'POST'])
-#def loeschen(klasse_id):
-#    class_controller.loeschen(klasse_id)
+@app.route('/loeschen/<int:klasse_id>', methods=['GET', 'POST'])
+def loeschen(klasse_id):
+    return class_controller.loeschen(klasse_id)
+
+@app.route('/bearbeiten/<int:klasse_id>', methods=['GET', 'POST'])
+def bearbeiten(klasse_id):
+    class_controller.bearbeiten(klasse_id)
+
+@app.route('/schueler/hinzufuegen/', methods=['GET'])
+def schueler_hinzufuegen_seite():
+    klassen = class_controller.get_all_classnames()
+    print(klassen)
+    return render_template('schueler_hinzufuegen.html', klassen=klassen)
+
+@app.route('/schueler/hinzufuegen/', methods=['POST'])
+def schueler_hinzufuegen():
+    return class_controller.add_students()
 
 
 if __name__ == '__main__':
