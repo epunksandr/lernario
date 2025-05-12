@@ -1,18 +1,13 @@
-from flask import request, redirect, url_for, flash
-from services import student_service
+from flask import Blueprint, jsonify, render_template
+from services import schueler_service
 
-def add_new_student():
-    fname = request.form.get('fname')
-    lname = request.form.get('lname')
-    klasse = request.form.get('klasse')
+schueler_bp = Blueprint('schueler', __name__, url_prefix="/schueler")
 
-    if not fname or lname or klasse:
-        flash("es fehlen daten", "danger")
-        return redirect(url_for('/schueler/hinzufuegen'))
+@schueler_bp.route('/', methods=['GET'])
+def uebersicht():
+    schueler_liste = schueler_service.gib_alle_schueler_mit_grundinformationen()
+    return render_template("schueler.html", schueler_liste=schueler_liste, active_page="schueler")
 
-    success = class_service.add_class(klassenname)
-
-    if success:
-        return redirect(url_for('klassen'))
-    else:
-        flash("Hinzufügen fehlgeschlagen", "danger")
+@schueler_bp.route('/<int:id>/loeschen')
+def loeschen(id):
+    schueler_service.loesche_schueler(id)
