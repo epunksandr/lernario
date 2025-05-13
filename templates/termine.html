@@ -1,0 +1,36 @@
+{% extends "components/layout.html" %}
+
+{% include "components/header.html" %}
+
+{% block content %}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Terminübersicht</h3>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#klasseModal">+ Termin hinzufügen</button>
+    </div>
+
+    <div class="list-group">
+
+        {% for termin in termine_liste %}
+        <div class="list-group-item list-group-item-action mb-2 shadow-sm">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1">{{ termin.termin_name }}</h5>
+                <small class="text-muted">{{ termin.datum }}</small>
+            </div>
+            <p class="mb-1">{{ termin.beschreibung }}</p>
+            <small class="text-secondary">📚 Klasse: {{ termin.klassenname }}</small>
+            <div class="mt-2 d-flex gap-2">
+                <a href="#" class="btn btn-sm btn-outline-warning">Bearbeiten</a>
+                <a href="#" class="btn btn-sm btn-outline-danger">Löschen</a>
+            </div>
+        </div>
+        {% else %}
+        <p>Keine Termine gefunden.</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
