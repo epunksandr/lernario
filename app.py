@@ -23,6 +23,10 @@ def handle_login():
 def homepage():
     return render_template('homepage.html', active_page="homepage")
 
+@app.route('/termin')
+def show_termin_form():
+    return render_template('termin-form.html')
+
 @app.route('/klassenverwaltung')
 def klassen():
     klassen_liste = get_all_classes_with_students_count()
