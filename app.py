@@ -32,6 +32,10 @@ def homepage():
     vorname_des_benutzers = gib_vornamen_des_aktuellen_benutzers()
     return render_template('homepage.html', vorname_des_benutzers=vorname_des_benutzers, active_page="homepage")
 
+@app.route('/termin')
+def show_termin_form():
+    return render_template('termin-form.html')
+
 @app.route('/noten')
 def noten():
     return render_template('noten.html', active_page="noten")
