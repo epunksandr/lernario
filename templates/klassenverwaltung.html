@@ -25,10 +25,10 @@
                 <tr>
                     <td>{{ klasse.klasse_id }}</td>
                     <td>{{ klasse.klassenname }}</td>
-                    <td>{{ klasse.student_count }}</td>
+                    <td>{{ klasse.schueler_anzahl }}</td>
                     <td>
-                        <a href="{{ url_for('bearbeiten', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
-                        <a href="{{ url_for('loeschen', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        <a href="{{ url_for('klassen.bearbeiten', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
+                        <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
                 </tr>
                 {% endfor %}

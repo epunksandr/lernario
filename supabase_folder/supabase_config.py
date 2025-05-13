@@ -1,2 +1,0 @@
-SUPABASE_URL = "https://lbtekvomcxmbeeibxeau.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxidGVrdm9tY3htYmVlaWJ4ZWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM0MTAwNTMsImV4cCI6MjA1ODk4NjA1M30.QPGCNM32vYqRcVx-nVpne_YtxXN1nu1fXEsucfGYmnQ"

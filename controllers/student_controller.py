@@ -11,5 +11,4 @@ def uebersicht():
 @schueler_bp.route('/<int:schueler_id>/loeschen')
 def loeschen(schueler_id):
     schueler_service.loesche_schueler(schueler_id)
-    flash(f"Item mit ID wurde gelöscht.", "success")
     return redirect(url_for('schueler.uebersicht'))
