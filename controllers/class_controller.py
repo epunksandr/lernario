@@ -8,7 +8,7 @@ def uebersicht():
     klassen_liste = class_service.get_all_classes_with_students_count()
     return render_template('klassenverwaltung.html', klassen_liste=klassen_liste, active_page="klassen")
 
-@klassen_bp.route('/<int:klasse_id>/hinzufuegen')
+@klassen_bp.route('/hinzufuegen', methods=['POST'])
 def hinzufuegen():
     klassenname = request.form.get('klassenname')
 
@@ -16,10 +16,10 @@ def hinzufuegen():
 
     if not klassenname:
         flash("klassenname erforderlich", "danger")
-        return redirect(url_for('klassen'))
+        return redirect(url_for('klassen.uebersicht'))
 
     class_service.add_class(klassenname)
-    return redirect(url_for('klassen'))
+    return redirect(url_for('klassen.uebersicht'))
 
 @klassen_bp.route('/<int:klasse_id>/loeschen')
 def loeschen(klasse_id):
