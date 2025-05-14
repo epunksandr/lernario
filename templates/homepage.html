@@ -11,7 +11,7 @@
         <div class="col-md-3">
             <div class="card p-3">
                 <h6 class="card-title">Klassen</h6>
-                <p class="card-text fs-4">4</p>
+                <p class="card-text fs-4">{{ klassenanzahl }}</p>
                 <a href="{{ url_for('klassen.uebersicht') }}" class="btn btn-outline-primary btn-sm">Verwalten</a>
             </div>
         </div>
@@ -51,14 +51,12 @@
     <div class="mt-5">
         <h5 class="mb-3">Abwesenheiten – Diese Woche</h5>
         <ul class="list-group">
+            {% for schueler in schueler_mit_fehlzeiten_in_dieser_woche %}
             <li class="list-group-item d-flex justify-content-between">
-                <span>Max Müller – 2 Tage</span>
-                <span class="text-muted">10a</span>
+                <span>{{schueler.vorname}} {{ schueler.nachname }} – {{ schueler.abwesenheiten }} Tage</span>
+                <span class="text-muted">{{ schueler.klassenname }}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between">
-                <span>Sarah Braun – 1 Tag</span>
-                <span class="text-muted">9a</span>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 
