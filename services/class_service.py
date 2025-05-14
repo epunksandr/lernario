@@ -30,3 +30,10 @@ def gib_klassen_von_lehrer(lehrer_id: int):
             join unterrichte on klassen.klasse_id = unterrichte.klasse_id
         where lehrer_id = ?
     """, (lehrer_id, ))
+
+def gib_klassenanzahl(lehrer_id: int) -> int:
+    result = query_db("""
+    select COUNT(*) as klassenanzahl from unterrichte
+    where lehrer_id = ?;
+    """, (lehrer_id, ))
+    return result[0]["klassenanzahl"]
