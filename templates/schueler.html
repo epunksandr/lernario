@@ -7,34 +7,106 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Schülerverwaltung</h3>
-        <a href="/schueler/hinzufuegen" class="btn btn-primary">+ Schüler hinzufügen</a>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#schuelerModal">+ Neue Schüler*in</button>
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
         {% for schueler in schueler_liste %}
         <div class="col">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">{{ schueler.vorname }} {{ schueler.nachname }}</h5>
-              <p class="card-text">
-                Klasse: {{ schueler.klassenname }}<br>
-                Notenschnitt: {{ schueler.notenschnitt }}<br>
-                Abwesenheiten: {{ schueler.abwesenheiten }}
-              </p>
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ schueler.vorname }} {{ schueler.nachname }}</h5>
+                    <p class="card-text">
+                        Klasse: {{ schueler.klassenname }}<br>
+                        Notenschnitt: {{ schueler.notenschnitt }}<br>
+                        Abwesenheiten: {{ schueler.abwesenheiten }}
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="/schueler/{{ schueler.schueler_id }}" class="btn btn-sm btn-primary">Details</a>
+                    <div>
+                        <a href="/schueler/{{ schueler.schueler_id }}/bearbeiten"
+                            class="btn btn-sm btn-warning" data-bs-target="#schuelerBearbeitenModal">Bearbeiten</a>
+                        <a href="/schueler/{{ schueler.schueler_id }}/loeschen"
+                            class="btn btn-sm btn-danger">Löschen</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="/schueler/{{ schueler.schueler_id }}" class="btn btn-sm btn-primary">Details</a>
-              <div>
-                <a href="/schueler/{{ schueler.schueler_id }}/bearbeiten" class="btn btn-sm btn-warning">Bearbeiten</a>
-                <a href="/schueler/{{ schueler.schueler_id }}/loeschen" class="btn btn-sm btn-danger">Löschen</a>
-              </div>
-            </div>
-          </div>
         </div>
         {% else %}
         <p>Keine Schüler gefunden.</p>
         {% endfor %}
-      </div>
+    </div>
 </div>
+
+<!-- Modal: Neue Schüler -->
+<div class="modal fade" id="schuelerModal" tabindex="-1" aria-labelledby="schuelerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="klasseModalLabel">Neue Schüler*in hinzufügen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Vorname">
+                        <label for="floatingInput">Vorname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Nachname">
+                        <label for="floatingPassword">Nachname</label>
+                    </div>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Wähle die Klasse</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Edit Schüler -->
+<div class="modal fade" id="schuelerBearbeitenModal" tabindex="-1" aria-labelledby="schuelerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="klasseModalLabel">Schüler*in bearbeiten</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" value="" placeholder="Vorname">
+                        <label for="floatingInput">Vorname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Nachname">
+                        <label for="floatingPassword">Nachname</label>
+                    </div>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Wähle die Klasse</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}

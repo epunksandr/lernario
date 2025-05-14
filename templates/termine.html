@@ -7,7 +7,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Terminübersicht</h3>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#klasseModal">+ Termin hinzufügen</button>
+        <a href="{{ url_for('termine.show_termin_form') }}" class="btn btn-primary">Neue Termin</a>
     </div>
 
     <div class="list-group">

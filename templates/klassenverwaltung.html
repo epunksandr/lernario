@@ -27,15 +27,19 @@
                     <td>{{ klasse.klassenname }}</td>
                     <td>{{ klasse.schueler_anzahl }}</td>
                     <td>
-                        <a href="{{ url_for('klassen.bearbeiten', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
-                        <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        <a href="{{ url_for('klassen.info', klasse_id=klasse.klasse_id) }}"
+                        class="btn btn-sm btn-outline-info">Info</a>
+                        <a href="{{ url_for('klassen.bearbeiten', klasse_id=klasse.klasse_id) }}"
+                            class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
+                        <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}"
+                            class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-</div>  
+</div>
 
 <!-- Modal: Neue Klasse -->
 <div class="modal fade" id="klasseModal" tabindex="-1" aria-labelledby="klasseModalLabel" aria-hidden="true">
@@ -49,7 +53,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="klassenname" class="form-label">Klassenname</label>
-                        <input type="text" class="form-control" id="klassenname" name="klassenname" placeholder="z. B. 9c">
+                        <input type="text" class="form-control" id="klassenname" name="klassenname"
+                            placeholder="z. B. 9c">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -60,5 +65,7 @@
         </div>
     </div>
 </div>
+
+
 
 {% endblock %}
