@@ -38,9 +38,12 @@ def gib_lehrer(lehrer_id: int):
 def register_user(vorname, nachname, email, password) -> bool:
     password = hashlib.sha512(password.encode()).hexdigest()
 
-    result = query_db("""
-    INSERT INTO lehrer (vorname, nachname, email, passwort)
-    VALUES (?,?,?,?)
-    """, (vorname, nachname, email, password, ), commit=True)
-    print(result)
-    return result
+    try:
+        query_db("""
+        INSERT INTO lehrer (vorname, nachname, email, passwort)
+        VALUES (?,?,?,?)
+        """, (vorname, nachname, email, password,), commit=True)
+    except:
+        return False
+
+    return True

@@ -4,6 +4,10 @@ from controllers.class_controller import klassen_bp
 from controllers import class_controller
 from controllers.student_controller import schueler_bp
 from services import termine_service
+from services import schueler_service
+
+from datetime import date
+from babel.dates import format_date
 
 app = Flask(__name__, template_folder="templates")
 app.secret_key = 'supergeheim123'
@@ -30,7 +34,13 @@ def handle_login():
 @app.route('/homepage')
 def homepage():
     vorname_des_benutzers = gib_vornamen_des_aktuellen_benutzers()
-    return render_template('homepage.html', vorname_des_benutzers=vorname_des_benutzers, active_page="homepage")
+    schueler_mit_fehlzeiten_in_dieser_woche = schueler_service.gib_abwesenheiten_von_dieser_woche()
+    datum = date.today()
+    formatiertes_datum = format_date(datum, "eeee, d. MMMM", "de")
+    return render_template('homepage.html',
+                           datum=formatiertes_datum,
+                           vorname_des_benutzers=vorname_des_benutzers,
+                           active_page="homepage")
 
 @app.route('/termin')
 def show_termin_form():
