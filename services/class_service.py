@@ -1,9 +1,9 @@
 from services.sqllite_db import query_db
 
-def add_class(classname: str):
+def add_class(klassenname: str):
     query_db("""
-    INSERT INTO classes (classname, enrollment_year) VALUES (?, ?)
-    """, (classname, "2024", ), commit=True)
+    INSERT INTO klassen (klassenname) VALUES (?)
+    """, (klassenname, ), commit=True)
 
 def delete_class(class_id: int):
     query_db("""
@@ -26,3 +26,10 @@ def gib_klassen_von_lehrer(lehrer_id: int):
             join unterrichte on klassen.klasse_id = unterrichte.klasse_id
         where lehrer_id = ?
     """, (lehrer_id, ))
+
+def gib_klassenanzahl(lehrer_id: int) -> int:
+    result = query_db("""
+    select COUNT(*) as klassenanzahl from unterrichte
+    where lehrer_id = ?;
+    """, (lehrer_id, ))
+    return result[0]["klassenanzahl"]
