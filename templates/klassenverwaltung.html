@@ -27,21 +27,23 @@
                     <td>{{ klasse.klassenname }}</td>
                     <td>{{ klasse.schueler_anzahl }}</td>
                     <td>
-                        <a href="{{ url_for('klassen.bearbeiten', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
-                        <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        <a href="{{ url_for('klassen.bearbeiten', klasse_id=klasse.klasse_id) }}"
+                            class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
+                        <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}"
+                            class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-</div>  
+</div>
 
 <!-- Modal: Neue Klasse -->
 <div class="modal fade" id="klasseModal" tabindex="-1" aria-labelledby="klasseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/neue_klasse" method="post" >
+            <form action="/neue_klasse" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="klasseModalLabel">Neue Klasse hinzufügen</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
@@ -49,7 +51,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="klassenname" class="form-label">Klassenname</label>
-                        <input type="text" class="form-control" id="klassenname" name="klassenname" placeholder="z. B. 9c">
+                        <input type="text" class="form-control" id="klassenname" name="klassenname"
+                            placeholder="z. B. 9c">
                     </div>
                 </div>
                 <div class="modal-footer">
