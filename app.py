@@ -3,6 +3,7 @@ from controllers.teacher_controller import einloggen, register, gib_vornamen_des
 from controllers.class_controller import klassen_bp
 from controllers import class_controller
 from controllers.student_controller import schueler_bp
+from controllers.termine_controller import termine_bp
 from services import termine_service
 from services import schueler_service
 
@@ -14,6 +15,7 @@ app.secret_key = 'supergeheim123'
 
 app.register_blueprint(schueler_bp)
 app.register_blueprint(klassen_bp)
+app.register_blueprint(termine_bp)
 
 @app.route('/', methods=['GET'])
 def show_register():
@@ -42,18 +44,9 @@ def homepage():
                            vorname_des_benutzers=vorname_des_benutzers,
                            active_page="homepage")
 
-@app.route('/termin')
-def show_termin_form():
-    return render_template('termin-form.html')
-
 @app.route('/noten')
 def noten():
     return render_template('noten.html', active_page="noten")
-
-@app.route('/termine')
-def termine():
-    termine_liste = termine_service.gib_alle_termine()
-    return render_template('termine.html', termine_liste=termine_liste, active_page="kalender")
 
 @app.route('/schueler/hinzufuegen/', methods=['GET'])
 def schueler_hinzufuegen_seite():
