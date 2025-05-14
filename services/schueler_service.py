@@ -42,3 +42,4 @@ def gib_abwesenheiten_von_dieser_woche():
         GROUP BY noten.schueler_id
     """)
     return data
+
