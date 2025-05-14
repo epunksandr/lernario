@@ -10,7 +10,6 @@ def uebersicht():
     print(klassen_liste)  # Debugging-Ausgabe, um sicherzustellen, dass Daten korrekt abgerufen werden
     return render_template('klassenverwaltung.html', klassen_liste=klassen_liste, active_page="klassen")
 
-
 @klassen_bp.route('/hinzufuegen', methods=['POST'])
 def hinzufuegen():
     klassenname = request.form.get('klassenname')
