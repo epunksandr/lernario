@@ -1,9 +1,10 @@
 from services.sqllite_db import query_db
 
-def add_class(classname: str):
+def add_class(klassenname: str):
     query_db("""
-    INSERT INTO classes (classname, enrollment_year) VALUES (?, ?)
-    """, (classname, "2024", ), commit=True)
+        INSERT INTO klassen (klassenname)
+        VALUES (?)
+    """, (klassenname,), commit=True)
 
 def delete_class(class_id: int):
     query_db("""
@@ -11,14 +12,17 @@ def delete_class(class_id: int):
         """, (class_id, ), commit=True)
 
 def get_all_classes_with_students_count():
-    return query_db("""
-        select klassen.klasse_id, klassen.klassenname, COUNT(DISTINCT schueler.schueler_id) as schueler_anzahl from schueler
-        join klassen on schueler.klasse_id = klassen.klasse_id
-        group by klassen.klasse_id
-    """)
+    query = """
+        SELECT k.klasse_id, k.klassenname, COUNT(s.schueler_id) AS schueler_anzahl
+        FROM klassen k
+        LEFT JOIN schueler s ON s.klasse_id = k.klasse_id
+        GROUP BY k.klasse_id, k.klassenname
+    """
+    result = query_db(query)
+    return result
 
 def get_all_classnames():
-    return query_db("SELECT classname FROM classes")
+    return query_db("SELECT klassenname FROM klassen")
 
 def gib_klassen_von_lehrer(lehrer_id: int):
     return query_db("""

@@ -26,7 +26,7 @@
                     <a href="/schueler/{{ schueler.schueler_id }}" class="btn btn-sm btn-primary">Details</a>
                     <div>
                         <a href="/schueler/{{ schueler.schueler_id }}/bearbeiten"
-                            class="btn btn-sm btn-warning">Bearbeiten</a>
+                            class="btn btn-sm btn-warning" data-bs-target="#schuelerBearbeitenModal">Bearbeiten</a>
                         <a href="/schueler/{{ schueler.schueler_id }}/loeschen"
                             class="btn btn-sm btn-danger">Löschen</a>
                     </div>
@@ -51,6 +51,40 @@
                 <div class="modal-body">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Vorname">
+                        <label for="floatingInput">Vorname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Nachname">
+                        <label for="floatingPassword">Nachname</label>
+                    </div>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Wähle die Klasse</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Edit Schüler -->
+<div class="modal fade" id="schuelerBearbeitenModal" tabindex="-1" aria-labelledby="schuelerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="klasseModalLabel">Schüler*in bearbeiten</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" value="" placeholder="Vorname">
                         <label for="floatingInput">Vorname</label>
                     </div>
                     <div class="form-floating mb-3">

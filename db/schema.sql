@@ -13,8 +13,7 @@ CREATE TABLE lehrer (
 
 CREATE TABLE klassen (
     klasse_id INTEGER PRIMARY KEY,
-    klassenname TEXT,
-    einschulungsjahr INTEGER
+    klassenname TEXT
 );
 
 CREATE TABLE schueler (
