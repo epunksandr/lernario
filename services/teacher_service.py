@@ -43,7 +43,8 @@ def register_user(vorname, nachname, email, password) -> bool:
         INSERT INTO lehrer (vorname, nachname, email, passwort)
         VALUES (?,?,?,?)
         """, (vorname, nachname, email, password,), commit=True)
-    except:
+    except Exception as e:
+        print(e)
         return False
 
     return True

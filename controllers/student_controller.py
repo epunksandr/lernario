@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, render_template, flash, redirect, url_for
-from services import schueler_service
+from services import schueler_service, class_service
 
 schueler_bp = Blueprint('schueler', __name__, url_prefix="/schueler")
 
@@ -12,3 +12,13 @@ def uebersicht():
 def loeschen(schueler_id):
     schueler_service.loesche_schueler(schueler_id)
     return redirect(url_for('schueler.uebersicht'))
+
+@schueler_bp.route('/schueler/hinzufuegen/', methods=['GET'])
+def schueler_hinzufuegen_seite():
+    klassen = class_service.get_all_classnames()
+    print(klassen)
+    return render_template('schueler_hinzufuegen.html', klassen=klassen)
+
+@schueler_bp.route('/schueler/hinzufuegen/', methods=['POST'])
+def schueler_hinzufuegen():
+    return None
