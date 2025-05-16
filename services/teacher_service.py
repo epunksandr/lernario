@@ -1,50 +1,34 @@
-from services.sqllite_db import query_db
-import hashlib
+from db.db import SessionLocal
+from models.lehrer import Lehrer
 
-def login_user(email, password):
-    lehrer_id_json = query_db("""
-        SELECT lehrer_id from lehrer
-        where email == ?
-    """, (email, ))
+def login_user(email, password) -> int:
+    session = SessionLocal()
+    lehrer = session.query(Lehrer).filter_by(email=email).first()
 
-    try:
-        lehrer_id = lehrer_id_json[0]["lehrer_id"]
-    except:
-        return None
+    if not lehrer:
+        return 0
 
-    right_password_json = query_db("""
-        SELECT passwort from lehrer
-        where lehrer_id == ?
-    """, (lehrer_id, ))
-    try:
-        right_password = right_password_json[0]["passwort"]
-    except:
-        return None
-
-    password = hashlib.sha512(password.encode()).hexdigest()
-    if right_password == password:
-        return { "lehrer_id": lehrer_id }
+    if lehrer.check_passwort(password):
+        return lehrer.lehrer_id
     else:
-        return None
+        return 0
 
 def gib_lehrer(lehrer_id: int):
-    result = query_db("""
-        select * from lehrer
-        where lehrer_id == ?
-    """, (lehrer_id, ))
-    return result
+    session = SessionLocal()
+    lehrer = session.query(Lehrer).filter_by(lehrer_id=lehrer_id).first()
+    session.close()
+    return lehrer
 
+def register_user(vorname, nachname, email, password):
 
-def register_user(vorname, nachname, email, password) -> bool:
-    password = hashlib.sha512(password.encode()).hexdigest()
-
-    try:
-        query_db("""
-        INSERT INTO lehrer (vorname, nachname, email, passwort)
-        VALUES (?,?,?,?)
-        """, (vorname, nachname, email, password,), commit=True)
-    except Exception as e:
-        print(e)
-        return False
-
+    session = SessionLocal()
+    neuer_lehrer = Lehrer(
+        vorname=vorname,
+        nachname=nachname,
+        email=email,
+        passwort=password
+    )
+    session.add(neuer_lehrer)
+    session.commit()
+    session.close()
     return True

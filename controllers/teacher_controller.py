@@ -10,10 +10,10 @@ def einloggen():
         flash("E-Mail und Passwort erforderlich", "danger")
         return redirect(url_for('show_login_form'))
 
-    auth_result = login_user(email, password)
+    lehrer_id = login_user(email, password)
 
-    if auth_result:
-        session['current_teacher_id'] = auth_result['lehrer_id']
+    if lehrer_id != 0:
+        session['current_teacher_id'] = lehrer_id
         return redirect(url_for('homepage'))
     else:
         flash("Login fehlgeschlagen", "danger")
@@ -37,5 +37,6 @@ def register():
         return redirect(url_for("show_register"))
 
 def gib_vornamen_des_aktuellen_benutzers() -> int:
-    aktueller_benutzer = gib_lehrer(session['current_teacher_id'])
-    return aktueller_benutzer[0]['vorname']
+    #aktueller_benutzer = gib_lehrer(session['current_teacher_id'])
+    #return aktueller_benutzer.vorname
+    return 0

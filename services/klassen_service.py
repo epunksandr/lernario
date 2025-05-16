@@ -1,3 +1,8 @@
+from gotrue import Session
+from sqlalchemy import func
+from models.unterrichte import Unterricht
+
+from db.db import SessionLocal
 from services.sqllite_db import query_db
 
 def add_class(klassenname: str):
@@ -35,8 +40,7 @@ def gib_klassen_von_lehrer(lehrer_id: int):
     """, (lehrer_id, ))
 
 def gib_klassenanzahl(lehrer_id: int) -> int:
-    result = query_db("""
-    select COUNT(*) as klassenanzahl from unterrichte
-    where lehrer_id = ?;
-    """, (lehrer_id, ))
-    return result[0]["klassenanzahl"]
+    session = SessionLocal()
+    klassenanzahl = session.query(func.count()).filter(Unterricht.lehrer_id == lehrer_id).scalar()
+    session.close()
+    return klassenanzahl

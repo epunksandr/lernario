@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template, flash, redirect, url_for, request
 
 from controllers.custom_blueprint import CustomBlueprint
-from services import schueler_service, class_service
+from services import schueler_service, klassen_service
 import inspect
 
 schueler_bp = CustomBlueprint('schueler', 'schueler')
