@@ -1,7 +1,14 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash
-from services import termine_service, klassen_service
+
+from controllers.class_controller import klassen_service
+from services.termine_service import TermineService
+from services.klassen_service import KlassenService
 
 termine_bp = Blueprint('termine', __name__, url_prefix="/termine")
+
+
+termine_service = TermineService()
+klassen_service = KlassenService()
 
 @termine_bp.route('/')
 def uebersicht():
@@ -24,7 +31,7 @@ def erstellen():
         return redirect(url_for("termine.uebersicht"))
     #GET
     cur_teacher_id = session['current_teacher_id']
-    klassen_liste = class_service.gib_klassen_von_lehrer(cur_teacher_id)
+    klassen_liste = klassen_service.gib_klassen_von_lehrer(cur_teacher_id)
     return render_template('termin-form.html', klassen_liste=klassen_liste)
 
 @termine_bp.route('/anzeigen/<int:termin_id>')

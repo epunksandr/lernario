@@ -1,10 +1,16 @@
 from flask import Blueprint, jsonify, render_template, flash, redirect, url_for, request
 
 from controllers.custom_blueprint import CustomBlueprint
-from services import schueler_service, klassen_service
+from services.schueler_service import SchuelerService
+from services.klassen_service import KlassenService
 import inspect
 
 schueler_bp = CustomBlueprint('schueler', 'schueler')
+
+
+
+schueler_service = SchuelerService()
+class_service = KlassenService()
 
 @schueler_bp.route('/', methods=['GET'])
 def uebersicht():

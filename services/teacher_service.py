@@ -1,34 +1,31 @@
 from db.db import SessionLocal
 from models.lehrer import Lehrer
+from services.lehrer_base_service import LehrerBaseService
 
-def login_user(email, password) -> int:
-    session = SessionLocal()
-    lehrer = session.query(Lehrer).filter_by(email=email).first()
 
-    if not lehrer:
-        return 0
+class LehrerService(LehrerBaseService):
+    def login_user(self, email, password) -> int:
+        session = SessionLocal()
+        lehrer = session.query(Lehrer).filter_by(email=email).first()
 
-    if lehrer.check_passwort(password):
-        return lehrer.lehrer_id
-    else:
-        return 0
+        if not lehrer:
+            return 0
 
-def gib_lehrer(lehrer_id: int):
-    session = SessionLocal()
-    lehrer = session.query(Lehrer).filter_by(lehrer_id=lehrer_id).first()
-    session.close()
-    return lehrer
+        if lehrer.check_passwort(password):
+            return lehrer.lehrer_id
+        else:
+            return 0
 
-def register_user(vorname, nachname, email, password):
+    def register_user(self, vorname, nachname, email, password):
 
-    session = SessionLocal()
-    neuer_lehrer = Lehrer(
-        vorname=vorname,
-        nachname=nachname,
-        email=email,
-        passwort=password
-    )
-    session.add(neuer_lehrer)
-    session.commit()
-    session.close()
-    return True
+        session = SessionLocal()
+        neuer_lehrer = Lehrer(
+            vorname=vorname,
+            nachname=nachname,
+            email=email,
+            passwort=password
+        )
+        session.add(neuer_lehrer)
+        session.commit()
+        session.close()
+        return True

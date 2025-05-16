@@ -1,7 +1,10 @@
 from flask import request, redirect, url_for, flash, Blueprint, render_template
-from services import klassen_service
+
+from services.klassen_service import KlassenService
 
 klassen_bp = Blueprint('klassen', __name__, url_prefix="/klassen")
+
+klassen_service = KlassenService()
 
 @klassen_bp.route('/')
 def uebersicht():
@@ -18,7 +21,7 @@ def erstellen():
         flash("Klassenname erforderlich", "danger")
         return redirect(url_for('klassen.uebersicht'))
 
-    klassen_service.add_class(klassenname)
+    klassen_service.erstelle_klasse(klassenname)
     flash("Klasse erfolgreich hinzugefügt", "success")
     return redirect(url_for('klassen.uebersicht'))
 
@@ -32,7 +35,7 @@ def aktualisieren(klasse_id):
 
 @klassen_bp.route('/<int:klasse_id>/loeschen')
 def loeschen(klasse_id):
-    klassen_service.delete_class(klasse_id)
+    klassen_service.loesche_klasse(klasse_id)
     return redirect(url_for('klassen.uebersicht'))
 
 def get_all_classnames():

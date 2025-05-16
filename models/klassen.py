@@ -6,3 +6,6 @@ class Klasse(Base):
 
     klasse_id = Column(Integer, primary_key=True)
     klassenname = Column(String, nullable=False)
+
+    def __init__(self, klassenname):
+        self.klassenname = klassenname

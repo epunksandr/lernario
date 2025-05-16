@@ -1,5 +1,7 @@
 from flask import request, redirect, url_for, flash, session
-from services.teacher_service import login_user, gib_lehrer, register_user
+from services.teacher_service import LehrerService
+
+ls = LehrerService()
 
 
 def einloggen():
@@ -10,7 +12,7 @@ def einloggen():
         flash("E-Mail und Passwort erforderlich", "danger")
         return redirect(url_for('show_login_form'))
 
-    lehrer_id = login_user(email, password)
+    lehrer_id = ls.login_user(email, password )
 
     if lehrer_id != 0:
         session['current_teacher_id'] = lehrer_id
@@ -29,7 +31,7 @@ def register():
         flash("Alle Felder sind erforderlich", "danger")
         return redirect(url_for("show_register"))
 
-    success = register_user(vorname, nachname, email, password)
+    success = ls.register_user(vorname, nachname, email, password)
     if success:
         return redirect(url_for('show_login_form'))
     else:
