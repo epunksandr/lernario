@@ -1,4 +1,6 @@
 from flask import Flask, render_template, session
+
+from controllers.noten_controller import noten_bp
 from controllers.teacher_controller import einloggen, register, gib_vornamen_des_aktuellen_benutzers
 from controllers.class_controller import klassen_bp
 from controllers import class_controller
@@ -15,6 +17,7 @@ app.secret_key = 'supergeheim123'
 app.register_blueprint(schueler_bp)
 app.register_blueprint(klassen_bp)
 app.register_blueprint(termine_bp)
+app.register_blueprint(noten_bp)
 
 @app.route('/', methods=['GET'])
 def show_register():
@@ -46,20 +49,6 @@ def homepage():
                            klassenanzahl=klassenanzahl,
                            schueler_mit_fehlzeiten_in_dieser_woche=schueler_mit_fehlzeiten_in_dieser_woche,
                            active_page="homepage")
-
-@app.route('/noten')
-def noten():
-    return render_template('noten.html', active_page="noten")
-
-@app.route('/schueler/hinzufuegen/', methods=['GET'])
-def schueler_hinzufuegen_seite():
-    klassen = class_controller.get_all_classnames()
-    print(klassen)
-    return render_template('schueler_hinzufuegen.html', klassen=klassen)
-
-@app.route('/schueler/hinzufuegen/', methods=['POST'])
-def schueler_hinzufuegen():
-    return class_controller.add_students()
 
 
 if __name__ == '__main__':
