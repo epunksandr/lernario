@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for, flash, Blueprint, render_template
-from services import class_service
+from services import klassen_service
 
 noten_bp = Blueprint('noten', __name__, url_prefix="/noten")
 

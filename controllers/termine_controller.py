@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash
-from services import termine_service, class_service
+from services import termine_service, klassen_service
 
 termine_bp = Blueprint('termine', __name__, url_prefix="/termine")
 

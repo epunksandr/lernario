@@ -7,11 +7,13 @@ from controllers.class_controller import klassen_bp
 from controllers import class_controller
 from controllers.student_controller import schueler_bp
 from controllers.termine_controller import termine_bp
-from services import schueler_service, class_service
+from db.tabellen_anlegen import tabellen_anlegen
+from services import schueler_service, klassen_service
 
 from datetime import date
 from babel.dates import format_date
 
+tabellen_anlegen()
 app = Flask(__name__, template_folder="templates")
 app.secret_key = 'supergeheim123'
 
@@ -40,7 +42,7 @@ def handle_login():
 def homepage():
     cur_lehrer_id = session['current_teacher_id']
     vorname_des_benutzers = gib_vornamen_des_aktuellen_benutzers()
-    klassenanzahl = class_service.gib_klassenanzahl(cur_lehrer_id)
+    klassenanzahl = klassen_service.gib_klassenanzahl(cur_lehrer_id)
     schueler_mit_fehlzeiten_in_dieser_woche = schueler_service.gib_abwesenheiten_von_dieser_woche()
     datum = date.today()
     formatiertes_datum = format_date(datum, "eeee, d. MMMM", "de")
