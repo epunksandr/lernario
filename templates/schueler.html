@@ -25,9 +25,9 @@
                 <div class="card-footer d-flex justify-content-between">
                     <a href="/schueler/{{ schueler.schueler_id }}" class="btn btn-sm btn-primary">Details</a>
                     <div>
-                        <a href="/schueler/{{ schueler.schueler_id }}/bearbeiten"
+                        <a href="/schueler/bearbeiten/{{ schueler.schueler_id }}"
                             class="btn btn-sm btn-warning" data-bs-target="#schuelerBearbeitenModal">Bearbeiten</a>
-                        <a href="/schueler/{{ schueler.schueler_id }}/loeschen"
+                        <a href="/schueler/loeschen/{{ schueler.schueler_id }}"
                             class="btn btn-sm btn-danger">Löschen</a>
                     </div>
                 </div>
@@ -43,25 +43,25 @@
 <div class="modal fade" id="schuelerModal" tabindex="-1" aria-labelledby="schuelerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="" method="post">
+            <form action="{{ url_for('schueler.erstellen') }}" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="klasseModalLabel">Neue Schüler*in hinzufügen</h5>
+                    <h5 class="modal-title" >Neue Schüler*in hinzufügen</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Vorname">
+                        <input name="vorname" type="text" class="form-control" placeholder="Vorname">
                         <label for="floatingInput">Vorname</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Nachname">
-                        <label for="floatingPassword">Nachname</label>
+                        <input name="nachname" type="text" class="form-control" placeholder="Nachname">
+                        <label for="floatingInput">Nachname</label>
                     </div>
-                    <select class="form-select" aria-label="Default select example">
+                    <select name="klasse_id" class="form-select" aria-label="Default select example">
                         <option selected>Wähle die Klasse</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {% for klasse in klassen_liste %}
+                            <option value="{{ klasse.klasse_id }}" >{{ klasse.klassenname }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -93,9 +93,9 @@
                     </div>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Wähle die Klasse</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {% for klasse in klassen_liste %}
+                            <option value="{{ klasse.klasse_id }}" >{{ klasse.klassenname }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="modal-footer">

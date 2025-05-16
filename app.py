@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session
 
+from controllers.custom_blueprint import CustomBlueprint
 from controllers.noten_controller import noten_bp
 from controllers.teacher_controller import einloggen, register, gib_vornamen_des_aktuellen_benutzers
 from controllers.class_controller import klassen_bp
@@ -14,7 +15,7 @@ from babel.dates import format_date
 app = Flask(__name__, template_folder="templates")
 app.secret_key = 'supergeheim123'
 
-app.register_blueprint(schueler_bp)
+app.register_blueprint(schueler_bp, url_prefix="/schueler")
 app.register_blueprint(klassen_bp)
 app.register_blueprint(termine_bp)
 app.register_blueprint(noten_bp)

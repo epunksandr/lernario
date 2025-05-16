@@ -2,6 +2,11 @@ from flask import jsonify
 
 from services.sqllite_db import query_db
 
+def erstelle_schueler(vorname, nachname, klasse_id: None):
+    query_db("""
+        insert into schueler (vorname, nachname, klasse_id)
+        values (?, ?, ?)
+    """, (vorname, nachname, klasse_id), commit=True)
 
 def loesche_schueler(schueler_id: int):
     query_db("DELETE FROM schueler WHERE schueler_id=?;", (schueler_id, ), commit=True)

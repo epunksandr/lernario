@@ -24,6 +24,9 @@ def get_all_classes_with_students_count():
 def get_all_classnames():
     return query_db("SELECT klassenname FROM klassen")
 
+def gib_alle_klassen():
+    return query_db("SELECT klasse_id, klassenname FROM klassen")
+
 def gib_klassen_von_lehrer(lehrer_id: int):
     return query_db("""
         select klassen.klasse_id, klassen.klassenname from klassen
