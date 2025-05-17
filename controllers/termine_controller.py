@@ -21,7 +21,3 @@ def uebersicht():
 @termine_bp.route('/anzeigen/<int:termin_id>')
 def anzeigen(termin_id):
     pass
-
-@termine_bp.route('/aktualisieren/<int:termin_id>')
-def aktualisieren(termin_id):
-    pass

@@ -20,6 +20,16 @@ class LehrerBlueprint(Blueprint):
 
             service.erstelle_lehrer(vorname, nachname, email, passwort_hash)
             return redirect(url_for('lehrer.uebersicht'))
+            
+        @self.route(f'/aktualisieren', methods=["GET, POST"])
+        def aktualisieren():
+            vorname=request.form.get("vorname")
+            nachname=request.form.get("nachname")
+            email=request.form.get("email")
+            passwort_hash=request.form.get("passwort_hash")
+
+            service.aktualisiere_lehrer(vorname, nachname, email, passwort_hash)
+            return redirect(url_for('lehrer.uebersicht'))
 
         @self.route(f'/loeschen/<int:lehrer_id>')
         def loeschen(lehrer_id):

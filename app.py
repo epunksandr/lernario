@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session
 
-from controllers.lehrer_controller import einloggen, register, gib_vornamen_des_aktuellen_benutzers
+from controllers.lehrer_controller import einloggen, register, lehrer_service
 from controllers.klassen_controller import klassen_bp
 from controllers.schueler_controller import schueler_bp
 from controllers.termine_controller import termine_bp
@@ -8,9 +8,11 @@ from db.tabellen_anlegen import tabellen_anlegen
 from services.schueler_service import SchuelerService
 from services.klassen_service import KlassenService
 from services.termine_service import TermineService
+from services.lehrer_service import LehrerService
 schueler_service = SchuelerService()
 klassen_service = KlassenService()
 termin_service = TermineService()
+lehrer_service = LehrerService()
 
 from datetime import date
 from babel.dates import format_date
@@ -42,7 +44,7 @@ def handle_login():
 @app.route('/homepage')
 def homepage():
     cur_lehrer_id = session['current_teacher_id']
-    vorname_des_benutzers = gib_vornamen_des_aktuellen_benutzers()
+    vorname_des_benutzers = lehrer_service.gib_lehrer(cur_lehrer_id).vorname
     schueleranzahl = schueler_service.gib_schueleranzahl_von_lehrer(cur_lehrer_id)
     klassenanzahl = klassen_service.gib_klassenanzahl(cur_lehrer_id)
     datum = date.today()

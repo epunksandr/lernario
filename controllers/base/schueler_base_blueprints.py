@@ -19,6 +19,15 @@ class SchuelerBlueprint(Blueprint):
 
             service.erstelle_schueler(klasse_id, vorname, nachname)
             return redirect(url_for('schueler.uebersicht'))
+            
+        @self.route(f'/aktualisieren', methods=["GET, POST"])
+        def aktualisieren():
+            klasse_id=request.form.get("klasse_id")
+            vorname=request.form.get("vorname")
+            nachname=request.form.get("nachname")
+
+            service.aktualisiere_schueler(klasse_id, vorname, nachname)
+            return redirect(url_for('schueler.uebersicht'))
 
         @self.route(f'/loeschen/<int:schueler_id>')
         def loeschen(schueler_id):

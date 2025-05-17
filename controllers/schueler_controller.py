@@ -26,7 +26,3 @@ def uebersicht():
 @schueler_bp.route('/anzeigen/<int:schueler_id>')
 def anzeigen(schueler_id):
     pass
-
-@schueler_bp.route('/aktualisieren/<int:schueler_id>')
-def aktualisieren(schueler_id):
-    pass

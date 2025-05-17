@@ -20,6 +20,16 @@ class TermineBlueprint(Blueprint):
 
             service.erstelle_termin(termin_name, datum, klasse_id)
             return redirect(url_for('termine.uebersicht'))
+            
+        @self.route(f'/aktualisieren', methods=["GET, POST"])
+        def aktualisieren():
+            termin_name=request.form.get("termin_name")
+            datum_str=request.form.get("datum")
+            datum = datetime.strptime(datum_str, "%Y-%m-%d").date()
+            klasse_id=request.form.get("klasse_id")
+
+            service.aktualisiere_termin(termin_name, datum, klasse_id)
+            return redirect(url_for('termine.uebersicht'))
 
         @self.route(f'/loeschen/<int:termin_id>')
         def loeschen(termin_id):

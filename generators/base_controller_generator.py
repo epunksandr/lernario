@@ -36,6 +36,12 @@ class {name2g}Blueprint(Blueprint):
 {set_attributes}
             service.erstelle_{name1k}({erstellen_param})
             return redirect(url_for('{name2k}.uebersicht'))
+            
+        @self.route(f'/aktualisieren', methods=["GET, POST"])
+        def aktualisieren():
+{set_attributes}
+            service.aktualisiere_{name1k}({erstellen_param})
+            return redirect(url_for('{name2k}.uebersicht'))
 
         @self.route(f'/loeschen/<int:{name1k}_id>')
         def loeschen({name1k}_id):

@@ -18,6 +18,14 @@ class KlassenBlueprint(Blueprint):
 
             service.erstelle_klasse(klassenname, lehrer_id)
             return redirect(url_for('klassen.uebersicht'))
+            
+        @self.route(f'/aktualisieren', methods=["GET, POST"])
+        def aktualisieren():
+            klassenname=request.form.get("klassenname")
+            lehrer_id=session['current_teacher_id']
+
+            service.aktualisiere_klasse(klassenname, lehrer_id)
+            return redirect(url_for('klassen.uebersicht'))
 
         @self.route(f'/loeschen/<int:klasse_id>')
         def loeschen(klasse_id):
