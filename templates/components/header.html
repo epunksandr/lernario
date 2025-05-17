@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse flex justify-content-center" id="navbarSupportedContent">
-            <ul class="nav me-auto mb-lg-0">
+            <ul class="nav ms-auto mb-lg-0">
                 <li>
                     <a href="{{ url_for('klassen.uebersicht') }}"
                         class="nav-link link-secondary{% if active_page == 'klassen' %}active {% endif %}">
@@ -25,10 +25,6 @@
                         class="nav-link link-secondary{% if active_page == 'kalender' %}active {% endif %}">Termine</a>
                 </li>
             </ul>
-            <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Schüler, Klasse" aria-label="Schüler">
-                <button class="btn btn-outline-primary" type="submit">Suchen</button>
-            </form>
         </div>
     </div>
 </nav>
