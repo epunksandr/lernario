@@ -9,8 +9,10 @@ from controllers.termine_controller import termine_bp
 from db.tabellen_anlegen import tabellen_anlegen
 from services.schueler_service import SchuelerService
 from services.klassen_service import KlassenService
+from services.termine_service import TermineService
 schueler_service = SchuelerService()
 klassen_service = KlassenService()
+termin_service = TermineService()
 
 from datetime import date
 from babel.dates import format_date
@@ -49,12 +51,17 @@ def homepage():
     schueler_mit_fehlzeiten_in_dieser_woche = schueler_service.gib_abwesenheiten_von_dieser_woche()
     datum = date.today()
     formatiertes_datum = format_date(datum, "eeee, d. MMMM", "de")
+    termine_liste = termin_service.gib_termine(cur_lehrer_id, 3)
+    naechster_termin = termine_liste[0]
+
     return render_template('homepage.html',
                            datum=formatiertes_datum,
                            vorname_des_benutzers=vorname_des_benutzers,
                            klassenanzahl=klassenanzahl,
                            schueleranzahl=schueleranzahl,
+                           naechster_termin=naechster_termin,
                            schueler_mit_fehlzeiten_in_dieser_woche=schueler_mit_fehlzeiten_in_dieser_woche,
+                           termine_liste=termine_liste,
                            active_page="homepage")
 
 

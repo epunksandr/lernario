@@ -1,5 +1,6 @@
 
 from flask import Blueprint, redirect, url_for, request, session
+from datetime import datetime
 from services.noten_service import NotenService
 
 
@@ -12,11 +13,11 @@ class NotenBlueprint(Blueprint):
 
         @self.route(f'/erstellen', methods=["POST"])
         def erstellen():
-            service.erstelle_note(
-                request.form.get("schueler_id"),
-                request.form.get("unterricht_id"),
-                request.form.get("note")    
-            )
+            schueler_id=request.form.get("schueler_id")
+            unterricht_id=request.form.get("unterricht_id")
+            note=request.form.get("note")
+
+            service.erstelle_note(schueler_id, unterricht_id, note)
             return redirect(url_for('noten.uebersicht'))
 
         @self.route(f'/loeschen/<int:note_id>')

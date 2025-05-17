@@ -23,15 +23,11 @@ class KlassenService(KlassenBaseService):
     def get_all_classnames(self):
         return query_db("SELECT klassenname FROM klassen")
 
-    def gib_alle_klassen(self):
-        return query_db("SELECT klasse_id, klassenname FROM klassen")
-
     def gib_klassen_von_lehrer(self, lehrer_id: int):
-        return query_db("""
-            select klassen.klasse_id, klassen.klassenname from klassen
-                join unterrichte on klassen.klasse_id = unterrichte.klasse_id
-            where lehrer_id = ?
-        """, (lehrer_id,))
+        session = SessionLocal()
+        klassen = session.query(Klasse).filter(Klasse.lehrer_id == lehrer_id).all()
+        session.close()
+        return klassen
 
     def gib_klassenanzahl(self, lehrer_id: int) -> int:
         session = SessionLocal()

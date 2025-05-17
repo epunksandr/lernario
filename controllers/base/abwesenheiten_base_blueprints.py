@@ -1,5 +1,6 @@
 
 from flask import Blueprint, redirect, url_for, request, session
+from datetime import datetime
 from services.abwesenheiten_service import AbwesenheitenService
 
 
@@ -12,10 +13,11 @@ class AbwesenheitenBlueprint(Blueprint):
 
         @self.route(f'/erstellen', methods=["POST"])
         def erstellen():
-            service.erstelle_abwesenheit(
-                request.form.get("schueler_id"),
-                request.form.get("datum")    
-            )
+            schueler_id=request.form.get("schueler_id")
+            datum_str=request.form.get("datum")
+            datum = datetime.strptime(datum_str, "%Y-%m-%d").date()
+
+            service.erstelle_abwesenheit(schueler_id, datum)
             return redirect(url_for('abwesenheiten.uebersicht'))
 
         @self.route(f'/loeschen/<int:abwesenheit_id>')

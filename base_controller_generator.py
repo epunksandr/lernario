@@ -3,19 +3,26 @@ import importlib.util
 import os
 import inspect
 from sqlalchemy.orm import DeclarativeMeta
+from sqlalchemy.orm.attributes import set_attribute
 
 
 def generate_code(name1g, name1k, name2k, attributes):
     name2g = name2k.capitalize()
     erstellen_param = ""
+    set_attributes = ""
     for attribut in attributes:
         if attribut == "lehrer_id":
-            erstellen_param += f"                session['current_teacher_id'],\n"
+            set_attributes += f"            {attribut}=session['current_teacher_id']\n"
+        elif "datum" in attribut.lower():
+            set_attributes += f"            datum_str=request.form.get(\"{attribut}\")\n"
+            set_attributes += f"            datum = datetime.strptime(datum_str, \"%Y-%m-%d\").date()\n"
         else:
-            erstellen_param += f"                request.form.get(\"{attribut}\"),\n"
+            set_attributes += f"            {attribut}=request.form.get(\"{attribut}\")\n"
+        erstellen_param += f"{attribut}, "
     erstellen_param = erstellen_param[:-2]
     return f"""
 from flask import Blueprint, redirect, url_for, request, session
+from datetime import datetime
 from services.{name2k}_service import {name2g}Service
 
 
@@ -28,9 +35,8 @@ class {name2g}Blueprint(Blueprint):
 
         @self.route(f'/erstellen', methods=["POST"])
         def erstellen():
-            service.erstelle_{name1k}(
-{erstellen_param}    
-            )
+{set_attributes}
+            service.erstelle_{name1k}({erstellen_param})
             return redirect(url_for('{name2k}.uebersicht'))
 
         @self.route(f'/loeschen/<int:{name1k}_id>')

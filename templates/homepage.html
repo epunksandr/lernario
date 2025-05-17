@@ -25,7 +25,7 @@
         <div class="col-md-3">
             <div class="card p-3">
                 <h6 class="card-title">Nächster Termin</h6>
-                <p class="card-text">Mathe-Arbeit<br>12. April 2025</p>
+                <p class="card-text">{{ naechster_termin.termin_name }}<br>{{ naechster_termin.datum.strftime("%d.%m.%Y") }}</p>
                 <a href="{{ url_for('termine.uebersicht') }}" class="btn btn-outline-primary btn-sm">Neue Termin</a>
             </div>
         </div>
@@ -104,23 +104,15 @@
                     <th>Klasse</th>
                 </tr>
             </thead>
+            {% for termin in termine_liste %}
             <tbody>
                 <tr>
-                    <td>12.04.2025</td>
-                    <td>Mathearbeit</td>
-                    <td>10a</td>
-                </tr>
-                <tr>
-                    <td>15.04.2025</td>
-                    <td>Elternabend</td>
-                    <td>9b</td>
-                </tr>
-                <tr>
-                    <td>18.04.2025</td>
-                    <td>Ausflug</td>
-                    <td>8c</td>
+                    <td>{{ termin.datum.strftime("%d.%m.%Y") }}</td>
+                    <td>{{ termin.termin_name }}</td>
+                    <td>{{ termin.klassenname }}</td>
                 </tr>
             </tbody>
+            {% endfor %}
         </table>
     </div>
 

@@ -1,5 +1,6 @@
 
 from flask import Blueprint, redirect, url_for, request, session
+from datetime import datetime
 from services.lehrer_service import LehrerService
 
 
@@ -12,12 +13,12 @@ class LehrerBlueprint(Blueprint):
 
         @self.route(f'/erstellen', methods=["POST"])
         def erstellen():
-            service.erstelle_lehrer(
-                request.form.get("vorname"),
-                request.form.get("nachname"),
-                request.form.get("email"),
-                request.form.get("passwort_hash")    
-            )
+            vorname=request.form.get("vorname")
+            nachname=request.form.get("nachname")
+            email=request.form.get("email")
+            passwort_hash=request.form.get("passwort_hash")
+
+            service.erstelle_lehrer(vorname, nachname, email, passwort_hash)
             return redirect(url_for('lehrer.uebersicht'))
 
         @self.route(f'/loeschen/<int:lehrer_id>')

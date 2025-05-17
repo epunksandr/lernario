@@ -8,4 +8,3 @@ class Termin(Base):
     termin_name = Column(String, nullable=False)
     datum = Column(Date, nullable=False)
     klasse_id = Column(Integer, ForeignKey("klassen.klasse_id", ondelete="CASCADE"))
-    beschreibung = Column(String)

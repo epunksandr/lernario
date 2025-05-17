@@ -9,12 +9,12 @@
         <h1 class="my-5 text-center">Termin</h1>
         <div class="row justify-content-center">
             <div class="col-12 col-xl-5">
-                <form action="" method="POST">
+                <form action="{{ url_for('termine.erstellen') }}" method="POST">
                     <div class="form-floating mb-3">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                        <input type="text" name="termin_name" class="form-control" id="name" placeholder="Name">
                         <label for="name">Name</label>
                     </div>
-                    <select class="form-select" name="klasse" aria-label="Default select example">
+                    <select class="form-select" name="klasse_id" aria-label="Default select example">
                         <option selected>Wähle die Klasse</option>
                         {% for klasse in klassen_liste %}
                         <option value="{{ klasse.klasse_id }}">{{ klasse.klassenname }}</option>
@@ -40,7 +40,7 @@
         <div class="list-group-item list-group-item-action mb-2 shadow-sm">
             <div class="d-flex w-100 justify-content-between align-items-center">
                 <h5 class="mb-1">{{ termin.termin_name }}</h5>
-                <small class="text-muted">{{ termin.datum }}</small>
+                <small class="text-muted">{{ termin.datum.strftime("%d.%m.%Y") }}</small>
             </div>
             <p class="mb-1">{{ termin.beschreibung }}</p>
             <small class="text-secondary">📚 Klasse: {{ termin.klassenname }}</small>
