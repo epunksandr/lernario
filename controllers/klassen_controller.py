@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, flash, Blueprint, render_template, session
+from flask import render_template, session
 
 from controllers.base.klassen_base_blueprints import KlassenBlueprint
 from services.klassen_service import KlassenService
@@ -10,8 +10,8 @@ klassen_service = KlassenService()
 @klassen_bp.route('/')
 def uebersicht():
     # Alle Klassen mit der Anzahl der Schüler abrufen
-    klassen_liste = klassen_service.get_all_classes_with_students_count()
-    print(klassen_liste)  # Debugging-Ausgabe, um sicherzustellen, dass Daten korrekt abgerufen werden
+    klassen_liste = klassen_service.gib_klassen_mit_schueleranzahl_von_lehrer(session['current_teacher_id'])
+    print(klassen_liste)
     return render_template('klassenverwaltung.html', klassen_liste=klassen_liste, active_page="klassen")
 
 @klassen_bp.route('/anzeigen/<int:klasse_id>')

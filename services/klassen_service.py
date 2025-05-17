@@ -2,23 +2,21 @@ from gotrue import Session
 from sqlalchemy import func
 
 from models.klassen import Klasse
-from models.unterrichte import Unterricht
-
 from db.db import SessionLocal
-from services.klassen_base_service import KlassenBaseService
-from services.sqllite_db import query_db
+from models.schueler import Schueler
+from services.base.klassen_base_service import KlassenBaseService
+
 
 class KlassenService(KlassenBaseService):
 
-    def get_all_classes_with_students_count(self):
-        query = """
-            SELECT k.klasse_id, k.klassenname, COUNT(s.schueler_id) AS schueler_anzahl
-            FROM klassen k
-            LEFT JOIN schueler s ON s.klasse_id = k.klasse_id
-            GROUP BY k.klasse_id, k.klassenname
-        """
-        result = query_db(query)
-        return result
+    def gib_klassen_mit_schueleranzahl_von_lehrer(self, lehrer_id: int):
+        session = SessionLocal()
+        klassen = (session.query(Klasse.klasse_id, Klasse.klassenname, func.count(Schueler.schueler_id).label("schueler_anzahl"))
+                   .join(Schueler, Klasse.klasse_id == Schueler.klasse_id)
+                   .filter(Klasse.lehrer_id == lehrer_id)
+                   .all())
+        session.close()
+        return klassen
 
     def gib_klassen_von_lehrer(self, lehrer_id: int):
         session = SessionLocal()

@@ -3,9 +3,8 @@ from flask import jsonify, session
 from db.db import SessionLocal
 from models.klassen import Klasse
 from models.termine import Termin
-from services.sqllite_db import query_db
-from services.termine_base_service import TermineBaseService
 from datetime import date
+from services.base.termine_base_service import TermineBaseService
 
 
 class TermineService(TermineBaseService):

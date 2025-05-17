@@ -1,10 +1,8 @@
 from flask import Flask, render_template, session
 
-from controllers.noten_controller import noten_bp
-from controllers.teacher_controller import einloggen, register, gib_vornamen_des_aktuellen_benutzers
-from controllers.class_controller import klassen_bp
-from controllers import class_controller
-from controllers.student_controller import schueler_bp
+from controllers.lehrer_controller import einloggen, register, gib_vornamen_des_aktuellen_benutzers
+from controllers.klassen_controller import klassen_bp
+from controllers.schueler_controller import schueler_bp
 from controllers.termine_controller import termine_bp
 from db.tabellen_anlegen import tabellen_anlegen
 from services.schueler_service import SchuelerService
@@ -23,7 +21,6 @@ app.secret_key = 'supergeheim123'
 
 app.register_blueprint(schueler_bp, url_prefix="/schueler")
 app.register_blueprint(klassen_bp, url_prefix="/klassen")
-app.register_blueprint(noten_bp, url_prefix="/noten")
 app.register_blueprint(termine_bp, url_prefix="/termine")
 
 @app.route('/', methods=['GET'])
@@ -48,11 +45,13 @@ def homepage():
     vorname_des_benutzers = gib_vornamen_des_aktuellen_benutzers()
     schueleranzahl = schueler_service.gib_schueleranzahl_von_lehrer(cur_lehrer_id)
     klassenanzahl = klassen_service.gib_klassenanzahl(cur_lehrer_id)
-    schueler_mit_fehlzeiten_in_dieser_woche = schueler_service.gib_abwesenheiten_von_dieser_woche()
     datum = date.today()
     formatiertes_datum = format_date(datum, "eeee, d. MMMM", "de")
     termine_liste = termin_service.gib_termine(cur_lehrer_id, 3)
-    naechster_termin = termine_liste[0]
+    if termine_liste:
+        naechster_termin = termine_liste[0]
+    else:
+        naechster_termin = None
 
     return render_template('homepage.html',
                            datum=formatiertes_datum,
@@ -60,7 +59,6 @@ def homepage():
                            klassenanzahl=klassenanzahl,
                            schueleranzahl=schueleranzahl,
                            naechster_termin=naechster_termin,
-                           schueler_mit_fehlzeiten_in_dieser_woche=schueler_mit_fehlzeiten_in_dieser_woche,
                            termine_liste=termine_liste,
                            active_page="homepage")
 

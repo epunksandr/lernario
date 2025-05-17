@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash
 
 from controllers.base.termine_base_blueprints import TermineBlueprint
-from controllers.class_controller import klassen_service
+from controllers.klassen_controller import klassen_service
 from services.termine_service import TermineService
 from services.klassen_service import KlassenService
 from datetime import datetime

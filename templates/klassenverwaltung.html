@@ -22,6 +22,7 @@
             </thead>
             <tbody>
                 {% for klasse in klassen_liste %}
+                {% if klasse.klasse_id %}
                 <tr>
                     <td>{{ klasse.klasse_id }}</td>
                     <td>{{ klasse.klassenname }}</td>
@@ -35,6 +36,9 @@
                             class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
                 </tr>
+                {% else %}
+                <p>Keine Klassen gefunden.</p>
+                {% endif %}
                 {% endfor %}
             </tbody>
         </table>

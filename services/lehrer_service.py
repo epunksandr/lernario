@@ -1,6 +1,6 @@
 from db.db import SessionLocal
 from models.lehrer import Lehrer
-from services.lehrer_base_service import LehrerBaseService
+from services.base.lehrer_base_service import LehrerBaseService
 
 
 class LehrerService(LehrerBaseService):

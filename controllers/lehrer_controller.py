@@ -1,6 +1,6 @@
 from flask import request, redirect, url_for, flash, session
 
-from controllers.class_controller import klassen_service
+from controllers.klassen_controller import klassen_service
 from services.lehrer_service import LehrerService
 
 ls = LehrerService()
