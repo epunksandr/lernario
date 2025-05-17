@@ -29,8 +29,8 @@
                     <td>
                         <a href="{{ url_for('klassen.anzeigen', klasse_id=klasse.klasse_id) }}"
                         class="btn btn-sm btn-outline-info">Info</a>
-                        <a href="{{ url_for('klassen.aktualisieren', klasse_id=klasse.klasse_id) }}"
-                            class="btn btn-sm btn-outline-secondary">Bearbeiten</a>
+                        <button data-bs-toggle="modal" data-bs-target="#klasseEditModal"
+                            class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
                         <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}"
                             class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
@@ -65,6 +65,32 @@
         </div>
     </div>
 </div>
+
+<!-- Modal: Klasse bearbeiten -->
+<div class="modal fade" id="klasseEditModal" tabindex="-1" aria-labelledby="klasseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ url_for('klassen.erstellen') }}" method="post" > <!-- die route muss angepast werden -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="klasseModalLabel">Klasse bearbeiten</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="klassenname" class="form-label">Klassenname</label>
+                        <input type="text" class="form-control" id="klassenname" name="klassenname"
+                            value=""> <!-- hier in value muss klassenname eingefügt werden -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 

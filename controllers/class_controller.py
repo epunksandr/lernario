@@ -27,7 +27,8 @@ def erstellen():
 
 @klassen_bp.route('/anzeigen/<int:klasse_id>')
 def anzeigen(klasse_id):
-    return render_template('klasseninfo.html')
+    klasse = klassen_service.gib_klasse(klasse_id)
+    return render_template('klasseninfo.html', klasse=klasse)
 
 @klassen_bp.route('/aktualisieren/<int:klasse_id>')
 def aktualisieren(klasse_id):
