@@ -1,12 +1,14 @@
 from gotrue import Session
 from sqlalchemy import func
+
+from models.klassen import Klasse
 from models.unterrichte import Unterricht
 
 from db.db import SessionLocal
-from services.klassen_base_service import KlasseBaseService
+from services.klassen_base_service import KlassenBaseService
 from services.sqllite_db import query_db
 
-class KlassenService(KlasseBaseService):
+class KlassenService(KlassenBaseService):
 
     def get_all_classes_with_students_count(self):
         query = """
@@ -33,6 +35,6 @@ class KlassenService(KlasseBaseService):
 
     def gib_klassenanzahl(self, lehrer_id: int) -> int:
         session = SessionLocal()
-        klassenanzahl = session.query(func.count()).filter(Unterricht.lehrer_id == lehrer_id).scalar()
+        klassenanzahl = session.query(func.count()).filter(Klasse.lehrer_id == lehrer_id).scalar()
         session.close()
         return klassenanzahl

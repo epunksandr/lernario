@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from db.db import Base
 
 class Klasse(Base):
@@ -6,6 +6,4 @@ class Klasse(Base):
 
     klasse_id = Column(Integer, primary_key=True)
     klassenname = Column(String, nullable=False)
-
-    def __init__(self, klassenname):
-        self.klassenname = klassenname
+    lehrer_id = Column(Integer, ForeignKey("lehrer.lehrer_id", ondelete="CASCADE"), nullable=False)

@@ -2,10 +2,10 @@
 from db.db import SessionLocal
 from models.faecher import Fach
 
-class FachBaseService:
+class FaecherBaseService:
     def erstelle_fach(self, fach):
         session = SessionLocal()
-        new_obj = Fach(fach)
+        new_obj = Fach(fach=fach)
         session.add(new_obj)
         session.commit()
         session.close()
@@ -19,7 +19,7 @@ class FachBaseService:
     def aktualisiere_fach(self, fach_id, fach):
         session = SessionLocal()
         obj = self.gib_fach(fach_id)
-        obj.fach=fach
+        fach=fach
 
         session.commit()
         session.close()

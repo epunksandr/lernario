@@ -3,9 +3,9 @@ from db.db import SessionLocal
 from models.lehrer import Lehrer
 
 class LehrerBaseService:
-    def erstelle_lehrer(self, vorname ,nachname ,email ,passwort_hash):
+    def erstelle_lehrer(self, vorname, nachname, email, passwort_hash):
         session = SessionLocal()
-        new_obj = Lehrer(vorname ,nachname ,email ,passwort_hash)
+        new_obj = Lehrer(vorname=vorname, nachname=nachname, email=email, passwort_hash=passwort_hash)
         session.add(new_obj)
         session.commit()
         session.close()
@@ -16,13 +16,13 @@ class LehrerBaseService:
         session.close()
         return obj
     
-    def aktualisiere_lehrer(self, lehrer_id, vorname ,nachname ,email ,passwort_hash):
+    def aktualisiere_lehrer(self, lehrer_id, vorname, nachname, email, passwort_hash):
         session = SessionLocal()
         obj = self.gib_lehrer(lehrer_id)
-        obj.vorname=vorname
-        obj.nachname=nachname
-        obj.email=email
-        obj.passwort_hash=passwort_hash
+        vorname=vorname
+        nachname=nachname
+        email=email
+        passwort_hash=passwort_hash
 
         session.commit()
         session.close()

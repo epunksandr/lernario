@@ -1,10 +1,10 @@
 from flask import jsonify
 
 from services.sqllite_db import query_db
-from services.termine_base_service import TerminBaseService
+from services.termine_base_service import TermineBaseService
 
 
-class TermineService(TerminBaseService):
+class TermineService(TermineBaseService):
 
     def gib_alle_termine(self):
         data = query_db(

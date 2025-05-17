@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for, flash, session
-from services.teacher_service import LehrerService
+from services.lehrer_service import LehrerService
 
 ls = LehrerService()
 

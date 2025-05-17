@@ -2,10 +2,10 @@
 from db.db import SessionLocal
 from models.termine import Termin
 
-class TerminBaseService:
-    def erstelle_termin(self, termin_name ,datum ,klasse_id ,beschreibung):
+class TermineBaseService:
+    def erstelle_termin(self, termin_name, datum, klasse_id, beschreibung):
         session = SessionLocal()
-        new_obj = Termin(termin_name ,datum ,klasse_id ,beschreibung)
+        new_obj = Termin(termin_name=termin_name, datum=datum, klasse_id=klasse_id, beschreibung=beschreibung)
         session.add(new_obj)
         session.commit()
         session.close()
@@ -16,13 +16,13 @@ class TerminBaseService:
         session.close()
         return obj
     
-    def aktualisiere_termin(self, termin_id, termin_name ,datum ,klasse_id ,beschreibung):
+    def aktualisiere_termin(self, termin_id, termin_name, datum, klasse_id, beschreibung):
         session = SessionLocal()
         obj = self.gib_termin(termin_id)
-        obj.termin_name=termin_name
-        obj.datum=datum
-        obj.klasse_id=klasse_id
-        obj.beschreibung=beschreibung
+        termin_name=termin_name
+        datum=datum
+        klasse_id=klasse_id
+        beschreibung=beschreibung
 
         session.commit()
         session.close()

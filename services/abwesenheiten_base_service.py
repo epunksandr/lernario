@@ -2,10 +2,10 @@
 from db.db import SessionLocal
 from models.abwesenheiten import Abwesenheit
 
-class AbwesenheitBaseService:
-    def erstelle_abwesenheit(self, schueler_id ,datum):
+class AbwesenheitenBaseService:
+    def erstelle_abwesenheit(self, schueler_id, datum):
         session = SessionLocal()
-        new_obj = Abwesenheit(schueler_id ,datum)
+        new_obj = Abwesenheit(schueler_id=schueler_id, datum=datum)
         session.add(new_obj)
         session.commit()
         session.close()
@@ -16,11 +16,11 @@ class AbwesenheitBaseService:
         session.close()
         return obj
     
-    def aktualisiere_abwesenheit(self, abwesenheit_id, schueler_id ,datum):
+    def aktualisiere_abwesenheit(self, abwesenheit_id, schueler_id, datum):
         session = SessionLocal()
         obj = self.gib_abwesenheit(abwesenheit_id)
-        obj.schueler_id=schueler_id
-        obj.datum=datum
+        schueler_id=schueler_id
+        datum=datum
 
         session.commit()
         session.close()

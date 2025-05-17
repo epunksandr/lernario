@@ -2,10 +2,10 @@
 from db.db import SessionLocal
 from models.klassen import Klasse
 
-class KlasseBaseService:
-    def erstelle_klasse(self, klassenname):
+class KlassenBaseService:
+    def erstelle_klasse(self, klassenname, lehrer_id):
         session = SessionLocal()
-        new_obj = Klasse(klassenname)
+        new_obj = Klasse(klassenname=klassenname, lehrer_id=lehrer_id)
         session.add(new_obj)
         session.commit()
         session.close()
@@ -16,10 +16,11 @@ class KlasseBaseService:
         session.close()
         return obj
     
-    def aktualisiere_klasse(self, klasse_id, klassenname):
+    def aktualisiere_klasse(self, klasse_id, klassenname, lehrer_id):
         session = SessionLocal()
         obj = self.gib_klasse(klasse_id)
-        obj.klassenname=klassenname
+        klassenname=klassenname
+        lehrer_id=lehrer_id
 
         session.commit()
         session.close()

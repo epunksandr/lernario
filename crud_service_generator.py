@@ -4,15 +4,29 @@ import os
 import inspect
 from sqlalchemy.orm import DeclarativeMeta
 
-def generate_code(name1g, name1k, name2k, attributes, attributes_set):
+def generate_code(name1g, name1k, name2k, attributes):
+    name2g = name2k.capitalize()
+    methoden_attribute = ""
+    konstruktor_attribute = ""
+    setzen_der_attribute = ""
+
+    for attribut in attributes:
+        line = attribut + ", "
+        methoden_attribute += line
+        konstruktor_attribute += ( attribut + "=" + attribut + ", " )
+        setzen_der_attribute += ( "        " + attribut + "=" + attribut + "\n" )
+
+    methoden_attribute = methoden_attribute[:-2]
+    konstruktor_attribute = konstruktor_attribute[:-2]
+
     return f"""
 from db.db import SessionLocal
 from models.{name2k} import {name1g}
 
-class {name1g}BaseService:
-    def erstelle_{name1k}(self, {attributes}):
+class {name2g}BaseService:
+    def erstelle_{name1k}(self, {methoden_attribute}):
         session = SessionLocal()
-        new_obj = {name1g}({attributes})
+        new_obj = {name1g}({konstruktor_attribute})
         session.add(new_obj)
         session.commit()
         session.close()
@@ -23,10 +37,10 @@ class {name1g}BaseService:
         session.close()
         return obj
     
-    def aktualisiere_{name1k}(self, {name1k}_id, {attributes}):
+    def aktualisiere_{name1k}(self, {name1k}_id, {methoden_attribute}):
         session = SessionLocal()
         obj = self.gib_{name1k}({name1k}_id)
-{attributes_set}
+{setzen_der_attribute}
         session.commit()
         session.close()
     
@@ -53,22 +67,13 @@ for file in model_files:
             name2k = obj.__tablename__
             name1k = name.lower()
 
-            pk = ""
-            attributes = ""
-            attributes_set = ""
+            attributes = []
             for column in obj.__table__.columns:
                 if column.primary_key:
                     pk = column.name
                 else:
-                    attributes += column.name + " ,"
-                    attributes_set += "        obj."
-                    attributes_set += column.name
-                    attributes_set += "="
-                    attributes_set += column.name
-                    attributes_set += "\n"
+                    attributes.append(column.name)
 
-            attributes = attributes[:-2]
-
-            code = generate_code(name1g, name1k, name2k, attributes, attributes_set)
+            code = generate_code(name1g, name1k, name2k, attributes)
             with open(f'services/{name2k}_base_service.py', 'w') as file:
                 file.write(code)
