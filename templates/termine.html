@@ -45,7 +45,6 @@
             <p class="mb-1">{{ termin.beschreibung }}</p>
             <small class="text-secondary">📚 Klasse: {{ termin.klassenname }}</small>
             <div class="mt-2 d-flex gap-2">
-                <a href="#" class="btn btn-sm btn-outline-warning">Bearbeiten</a>
                 <a href="{{ url_for('termine.loeschen', termin_id=termin.termin_id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
             </div>
         </div>

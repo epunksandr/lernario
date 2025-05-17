@@ -8,90 +8,28 @@
     <p class="text-secondary mt-4 mb-2">{{ datum }}</p>
     <h1 class="mb-5">Hallo, {{ vorname_des_benutzers }}</h1>
     <div class="row g-4">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h6 class="card-title">Klassen</h6>
                 <p class="card-text fs-4">{{ klassenanzahl }}</p>
                 <a href="{{ url_for('klassen.uebersicht') }}" class="btn btn-outline-primary btn-sm">Verwalten</a>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h6 class="card-title">Schüler</h6>
                 <p class="card-text fs-4">{{ schueleranzahl }}</p>
                 <a href="{{ url_for('schueler.uebersicht') }}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h6 class="card-title">Nächster Termin</h6>
                 <p class="card-text">{{ naechster_termin.termin_name }}<br>{{ naechster_termin.datum.strftime("%d.%m.%Y") if naechster_termin.datum else "-" }}</p>
                 <a href="{{ url_for('termine.uebersicht') }}" class="btn btn-outline-primary btn-sm">Neue Termin</a>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card p-3">
-                <h6 class="card-title">Klassenschnitt</h6>
-                <p class="card-text fs-4">2,4</p>
-                <a href="#" class="btn btn-outline-primary btn-sm">Details</a>
-            </div>
-        </div>
     </div>
-
-    <!-- Aktivitäten -->
-    <div class="mt-5">
-        <h5 class="mb-3">Letzte Aktivitäten</h5>
-        <ul class="list-group">
-            <li class="list-group-item">Note für Max Müller (3,0 in Deutsch) vergeben</li>
-            <li class="list-group-item">Neue Klasse "9b" erstellt</li>
-            <li class="list-group-item">Termin "Elternabend 10a" eingetragen</li>
-        </ul>
-    </div>
-
-    <div class="mt-5">
-        <h5 class="mb-3">Abwesenheiten – Diese Woche</h5>
-        <ul class="list-group">
-            {% for schueler in schueler_mit_fehlzeiten_in_dieser_woche %}
-            <li class="list-group-item d-flex justify-content-between">
-                <span>{{schueler.vorname}} {{ schueler.nachname }} – {{ schueler.abwesenheiten }} Tage</span>
-                <span class="text-muted">{{ schueler.klassenname }}</span>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <!-- Top Schüler -->
-    <div class="mt-5">
-        <h5 class="mb-3">Top 3 Schüler – Bester Notenschnitt</h5>
-        <table class="table table-sm table-bordered bg-white">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Klasse</th>
-                    <th>Ø Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Anna König</td>
-                    <td>10a</td>
-                    <td>1,3</td>
-                </tr>
-                <tr>
-                    <td>Leo Baum</td>
-                    <td>9b</td>
-                    <td>1,5</td>
-                </tr>
-                <tr>
-                    <td>Selin Yildiz</td>
-                    <td>8c</td>
-                    <td>1,7</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Abwesenheiten -->
 
     <!-- Termine -->
     <div class="mt-5">
