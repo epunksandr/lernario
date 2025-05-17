@@ -22,6 +22,3 @@ def anzeigen(klasse_id):
 @klassen_bp.route('/aktualisieren/<int:klasse_id>')
 def aktualisieren(klasse_id):
     pass
-
-def get_all_classnames():
-    return klassen_service.get_all_classnames()

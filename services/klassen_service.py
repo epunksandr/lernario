@@ -20,9 +20,6 @@ class KlassenService(KlassenBaseService):
         result = query_db(query)
         return result
 
-    def get_all_classnames(self):
-        return query_db("SELECT klassenname FROM klassen")
-
     def gib_klassen_von_lehrer(self, lehrer_id: int):
         session = SessionLocal()
         klassen = session.query(Klasse).filter(Klasse.lehrer_id == lehrer_id).all()

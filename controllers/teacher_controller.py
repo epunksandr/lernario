@@ -1,4 +1,6 @@
 from flask import request, redirect, url_for, flash, session
+
+from controllers.class_controller import klassen_service
 from services.lehrer_service import LehrerService
 
 ls = LehrerService()
@@ -39,6 +41,5 @@ def register():
         return redirect(url_for("show_register"))
 
 def gib_vornamen_des_aktuellen_benutzers() -> int:
-    #aktueller_benutzer = gib_lehrer(session['current_teacher_id'])
-    #return aktueller_benutzer.vorname
-    return 0
+    aktueller_benutzer = ls.gib_lehrer(session['current_teacher_id'])
+    return aktueller_benutzer.vorname

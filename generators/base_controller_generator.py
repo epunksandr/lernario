@@ -2,8 +2,6 @@ import glob
 import importlib.util
 import os
 import inspect
-from sqlalchemy.orm import DeclarativeMeta
-from sqlalchemy.orm.attributes import set_attribute
 
 
 def generate_code(name1g, name1k, name2k, attributes):
@@ -45,7 +43,7 @@ class {name2g}Blueprint(Blueprint):
             return redirect(url_for('{name2k}.uebersicht'))
     """
 
-
+os.chdir("..")
 model_files = glob.glob('models/*.py')
 
 for file in model_files:

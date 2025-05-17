@@ -2,7 +2,6 @@ import glob
 import importlib.util
 import os
 import inspect
-from sqlalchemy.orm import DeclarativeMeta
 
 def generate_code(name1g, name1k, name2k, attributes):
     name2g = name2k.capitalize()
@@ -52,6 +51,7 @@ class {name2g}BaseService:
         session.close()
     """
 
+os.chdir("..")
 model_files = glob.glob('models/*.py')
 
 for file in model_files:
@@ -75,5 +75,5 @@ for file in model_files:
                     attributes.append(column.name)
 
             code = generate_code(name1g, name1k, name2k, attributes)
-            with open(f'services/{name2k}_base_service.py', 'w') as file:
+            with open(f'services/base/{name2k}_base_service.py', 'w') as file:
                 file.write(code)
