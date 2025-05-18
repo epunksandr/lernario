@@ -19,8 +19,8 @@ class KlassenBlueprint(Blueprint):
             service.erstelle_klasse(klassenname, lehrer_id)
             return redirect(url_for('klassen.uebersicht'))
             
-        @self.route(f'/aktualisieren', methods=["GET, POST"])
-        def aktualisieren():
+        @self.route(f'/aktualisieren', methods=["POST"])
+        def aktualisieren(klassenname):
             klassenname=request.form.get("klassenname")
             lehrer_id=session['current_teacher_id']
 

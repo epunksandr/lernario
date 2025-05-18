@@ -18,8 +18,8 @@ class KlassenBaseService:
     
     def aktualisiere_klasse(self, klasse_id, klassenname, lehrer_id):
         session = SessionLocal()
-        obj = self.gib_klasse(klasse_id)
-        klassenname=klassenname
+        obj = session.query(Klasse).filter_by(klasse_id=klasse_id, lehrer_id=lehrer_id).first()
+        obj.klassenname=klassenname
         lehrer_id=lehrer_id
 
         session.commit()

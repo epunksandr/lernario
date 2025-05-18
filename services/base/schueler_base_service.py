@@ -22,7 +22,7 @@ class SchuelerBaseService:
         klasse_id=klasse_id
         vorname=vorname
         nachname=nachname
-
+        
         session.commit()
         session.close()
     

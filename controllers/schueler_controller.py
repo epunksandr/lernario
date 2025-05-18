@@ -25,4 +25,5 @@ def uebersicht():
 
 @schueler_bp.route('/anzeigen/<int:schueler_id>')
 def anzeigen(schueler_id):
-    pass
+    schueler = schueler_service.gib_schueler(schueler_id)
+    return render_template('schuelerinfo.html', schueler=schueler)

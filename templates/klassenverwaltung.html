@@ -29,9 +29,9 @@
                     <td>{{ klasse.schueler_anzahl }}</td>
                     <td>
                         <a href="{{ url_for('klassen.anzeigen', klasse_id=klasse.klasse_id) }}"
-                        class="btn btn-sm btn-outline-info">Info</a>
-                        <button data-bs-toggle="modal" data-bs-target="#klasseEditModal"
-                            class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
+                            class="btn btn-sm me-1 btn-outline-primary">Info</a>
+                        <!-- <button data-bs-toggle="modal" data-bs-target="#klasseEditModal"
+                            class="btn btn-sm btn-outline-secondary">Bearbeiten</button> -->
                         <a href="{{ url_for('klassen.loeschen', klasse_id=klasse.klasse_id) }}"
                             class="btn btn-sm btn-outline-danger">Löschen</a>
                     </td>
@@ -49,7 +49,7 @@
 <div class="modal fade" id="klasseModal" tabindex="-1" aria-labelledby="klasseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ url_for('klassen.erstellen') }}" method="post" >
+            <form action="{{ url_for('klassen.erstellen') }}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="klasseModalLabel">Neue Klasse hinzufügen</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
@@ -74,7 +74,7 @@
 <div class="modal fade" id="klasseEditModal" tabindex="-1" aria-labelledby="klasseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ url_for('klassen.erstellen') }}" method="post" > <!-- die route muss angepast werden -->
+            <form action="{{ url_for('klassen.aktualisieren') }}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="klasseModalLabel">Klasse bearbeiten</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
@@ -82,8 +82,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="klassenname" class="form-label">Klassenname</label>
-                        <input type="text" class="form-control" id="klassenname" name="klassenname"
-                            value=""> <!-- hier in value muss klassenname eingefügt werden -->
+                        <input type="text" class="form-control" id="klassenname" name="klassenname" value="">
                     </div>
                 </div>
                 <div class="modal-footer">

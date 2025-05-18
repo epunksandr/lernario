@@ -22,7 +22,7 @@ class KlassenService(KlassenBaseService):
     
     def gib_schueleranzahl_von_klasse(self, klasse_id: int):
         session = SessionLocal()
-        schueler_anzahl = (session.query(func.count(Schueler.schueler_id))
+        schueler_anzahl = (session.query(func.count(Schueler.schueler_id).label("schueler_anzahl"))
                            .filter(Schueler.klasse_id == klasse_id)
                            .scalar())
         session.close()

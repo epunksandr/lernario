@@ -7,7 +7,8 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Schülerverwaltung</h3>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#schuelerModal">+ Neue Schüler*in</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#schuelerModal">+ Neue
+            Schüler*in</button>
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
@@ -15,21 +16,17 @@
         <div class="col">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">{{ schueler.vorname }} {{ schueler.nachname }}</h5>
+                    <p class="h5">{{ schueler.vorname }} {{ schueler.nachname }}</p>
                     <p class="card-text">
-                        Klasse: {{ schueler.klassenname }}<br>
-                        Notenschnitt: {{ schueler.notenschnitt }}<br>
-                        Abwesenheiten: {{ schueler.abwesenheiten }}
+                        Klasse: {{ schueler.klassenname }}
                     </p>
                 </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="/schueler/{{ schueler.schueler_id }}" class="btn btn-sm btn-primary">Details</a>
-                    <div>
-                        <a href="/schueler/bearbeiten/{{ schueler.schueler_id }}"
-                            class="btn btn-sm btn-warning" data-bs-target="#schuelerBearbeitenModal">Bearbeiten</a>
-                        <a href="/schueler/loeschen/{{ schueler.schueler_id }}"
-                            class="btn btn-sm btn-danger">Löschen</a>
-                    </div>
+                <div class="card-footer d-flex gap-2 justify-content-between">
+                    <a href="/schueler/anzeigen/{{ schueler.schueler_id }}" class="btn w-50 btn-sm btn-primary">Details</a>
+                    <!--  <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#schuelerBearbeitenModal">Bearbeiten</button> -->
+                    <a href="/schueler/loeschen/{{ schueler.schueler_id }}"
+                        class="btn w-50 btn-sm btn-outline-danger">Löschen</a>
                 </div>
             </div>
         </div>
@@ -45,7 +42,7 @@
         <div class="modal-content">
             <form action="{{ url_for('schueler.erstellen') }}" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" >Neue Schüler*in hinzufügen</h5>
+                    <h5 class="modal-title">Neue Schüler*in hinzufügen</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
                 </div>
                 <div class="modal-body">
@@ -60,7 +57,7 @@
                     <select name="klasse_id" class="form-select" aria-label="Default select example">
                         <option selected>Wähle die Klasse</option>
                         {% for klasse in klassen_liste %}
-                            <option value="{{ klasse.klasse_id }}" >{{ klasse.klassenname }}</option>
+                        <option value="{{ klasse.klasse_id }}">{{ klasse.klassenname }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -74,7 +71,8 @@
 </div>
 
 <!-- Modal: Edit Schüler -->
-<div class="modal fade" id="schuelerBearbeitenModal" tabindex="-1" aria-labelledby="schuelerModalLabel" aria-hidden="true">
+<div class="modal fade" id="schuelerBearbeitenModal" tabindex="-1" aria-labelledby="schuelerModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="" method="post">
@@ -94,7 +92,7 @@
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Wähle die Klasse</option>
                         {% for klasse in klassen_liste %}
-                            <option value="{{ klasse.klasse_id }}" >{{ klasse.klassenname }}</option>
+                        <option value="{{ klasse.klasse_id }}">{{ klasse.klassenname }}</option>
                         {% endfor %}
                     </select>
                 </div>
