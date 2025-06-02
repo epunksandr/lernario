@@ -1,3 +1,4 @@
 db/lernario.db
 .idea
 .vscode
+**/__pycache/
