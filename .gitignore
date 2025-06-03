@@ -2,3 +2,5 @@ db/lernario.db
 .idea
 .vscode
 **/__pycache/
+
+supabase_folder/supabase_config.py
