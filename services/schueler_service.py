@@ -8,6 +8,9 @@ from services.base.schueler_base_service import SchuelerBaseService
 
 class SchuelerService(SchuelerBaseService):
 
+    def gib_alle_schueler_von_lehrer(self, lehrer_id):
+        pass
+
     def gib_alle_schueler_mit_grundinformationen(self, lehrer_id):
         session = SessionLocal()
         schueler = (session.query(

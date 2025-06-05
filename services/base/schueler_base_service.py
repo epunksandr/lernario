@@ -1,8 +1,14 @@
 
 from db.db import SessionLocal
 from models.schueler import Schueler
+from abc import ABC, abstractmethod
 
-class SchuelerBaseService:
+class SchuelerBaseService(ABC):
+
+    @abstractmethod
+    def gib_alle_schueler_von_lehrer(self, lehrer_id):
+        pass
+
     def erstelle_schueler(self, klasse_id, vorname, nachname):
         session = SessionLocal()
         new_obj = Schueler(klasse_id=klasse_id, vorname=vorname, nachname=nachname)
@@ -22,7 +28,7 @@ class SchuelerBaseService:
         klasse_id=klasse_id
         vorname=vorname
         nachname=nachname
-        
+
         session.commit()
         session.close()
     

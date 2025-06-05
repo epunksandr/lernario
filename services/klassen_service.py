@@ -9,6 +9,12 @@ from services.base.klassen_base_service import KlassenBaseService
 
 class KlassenService(KlassenBaseService):
 
+    def gib_alle_klassen_von_lehrer(self, lehrer_id):
+        session = SessionLocal()
+        klassen = session.query(Klasse).filter(Klasse.lehrer_id == lehrer_id).all()
+        session.close()
+        return klassen
+
     def gib_klassen_mit_schueleranzahl_von_lehrer(self, lehrer_id: int):
         session = SessionLocal()
         klassen = (session.query(Klasse.klasse_id, Klasse.klassenname, func.count(Schueler.schueler_id).label("schueler_anzahl"))
@@ -27,12 +33,6 @@ class KlassenService(KlassenBaseService):
                            .scalar())
         session.close()
         return schueler_anzahl
-
-    def gib_klassen_von_lehrer(self, lehrer_id: int):
-        session = SessionLocal()
-        klassen = session.query(Klasse).filter(Klasse.lehrer_id == lehrer_id).all()
-        session.close()
-        return klassen
 
     def gib_klassenanzahl(self, lehrer_id: int) -> int:
         session = SessionLocal()

@@ -14,8 +14,8 @@ klassen_service = KlassenService()
 
 @termine_bp.route('/')
 def uebersicht():
-    termine_liste = termine_service.gib_termine(session['current_teacher_id'])
-    klassen_liste = klassen_service.gib_klassen_von_lehrer(session['current_teacher_id'])
+    termine_liste = termine_service.gib_alle_termine_von_lehrer(session['current_teacher_id'])
+    klassen_liste = klassen_service.gib_alle_klassen_von_lehrer(session['current_teacher_id'])
     return render_template('termine.html', termine_liste=termine_liste, klassen_liste=klassen_liste, active_page="kalender")
 
 @termine_bp.route('/anzeigen/<int:termin_id>')

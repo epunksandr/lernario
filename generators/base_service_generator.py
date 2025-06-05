@@ -21,8 +21,14 @@ def generate_code(name1g, name1k, name2k, attributes):
     return f"""
 from db.db import SessionLocal
 from models.{name2k} import {name1g}
+from abc import ABC, abstractmethod
 
-class {name2g}BaseService:
+class {name2g}BaseService(ABC):
+
+    @abstractmethod
+    def gib_alle_{name2k}_von_lehrer(self, lehrer_id):
+        pass
+
     def erstelle_{name1k}(self, {methoden_attribute}):
         session = SessionLocal()
         new_obj = {name1g}({konstruktor_attribute})

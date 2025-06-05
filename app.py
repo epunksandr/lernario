@@ -49,7 +49,7 @@ def homepage():
     klassenanzahl = klassen_service.gib_klassenanzahl(cur_lehrer_id)
     datum = date.today()
     formatiertes_datum = format_date(datum, "eeee, d. MMMM", "de")
-    termine_liste = termin_service.gib_termine(cur_lehrer_id, 3)
+    termine_liste = termin_service.gib_alle_termine_von_lehrer(cur_lehrer_id, 3)
     if termine_liste:
         naechster_termin = termine_liste[0]
     else:

@@ -1,8 +1,14 @@
 
 from db.db import SessionLocal
 from models.klassen import Klasse
+from abc import ABC, abstractmethod
 
-class KlassenBaseService:
+class KlassenBaseService(ABC):
+
+    @abstractmethod
+    def gib_alle_klassen_von_lehrer(self, lehrer_id):
+        pass
+
     def erstelle_klasse(self, klassenname, lehrer_id):
         session = SessionLocal()
         new_obj = Klasse(klassenname=klassenname, lehrer_id=lehrer_id)
@@ -18,8 +24,8 @@ class KlassenBaseService:
     
     def aktualisiere_klasse(self, klasse_id, klassenname, lehrer_id):
         session = SessionLocal()
-        obj = session.query(Klasse).filter_by(klasse_id=klasse_id, lehrer_id=lehrer_id).first()
-        obj.klassenname=klassenname
+        obj = self.gib_klasse(klasse_id)
+        klassenname=klassenname
         lehrer_id=lehrer_id
 
         session.commit()

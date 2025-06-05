@@ -1,8 +1,14 @@
 
 from db.db import SessionLocal
 from models.termine import Termin
+from abc import ABC, abstractmethod
 
-class TermineBaseService:
+class TermineBaseService(ABC):
+
+    @abstractmethod
+    def gib_alle_termine_von_lehrer(self, lehrer_id):
+        pass
+
     def erstelle_termin(self, termin_name, datum, klasse_id):
         session = SessionLocal()
         new_obj = Termin(termin_name=termin_name, datum=datum, klasse_id=klasse_id)

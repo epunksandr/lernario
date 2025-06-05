@@ -1,8 +1,14 @@
 
 from db.db import SessionLocal
 from models.lehrer import Lehrer
+from abc import ABC, abstractmethod
 
-class LehrerBaseService:
+class LehrerBaseService(ABC):
+
+    @abstractmethod
+    def gib_alle_lehrer_von_lehrer(self, lehrer_id):
+        pass
+
     def erstelle_lehrer(self, vorname, nachname, email, passwort_hash):
         session = SessionLocal()
         new_obj = Lehrer(vorname=vorname, nachname=nachname, email=email, passwort_hash=passwort_hash)

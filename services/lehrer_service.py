@@ -1,9 +1,15 @@
+from abc import ABC
+
 from db.db import SessionLocal
 from models.lehrer import Lehrer
 from services.base.lehrer_base_service import LehrerBaseService
 
 
 class LehrerService(LehrerBaseService):
+
+    def gib_alle_lehrer_von_lehrer(self, lehrer_id):
+        pass
+
     def login_user(self, email, password) -> int:
         session = SessionLocal()
         lehrer = session.query(Lehrer).filter_by(email=email).first()
