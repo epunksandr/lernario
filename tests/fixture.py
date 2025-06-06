@@ -12,6 +12,11 @@ def enable_foreign_keys(dbapi_connection, connection_record):
     cursor.execute("PRAGMA foreign_keys=ON")
     cursor.close()
 
-SessionLocal = sessionmaker(bind=engine)
+TestBase = sessionmaker(bind=engine)
 Base = declarative_base()
+class Klasse(Base):
+    __tablename__ = "klassen"
+
+    klasse_id = Column(Integer, primary_key=True)
+    klassenname = Column(String, nullable=False)
 Base.metadata.create_all(bind=engine)
