@@ -1,0 +1,10 @@
+from tests import fixture
+from sqlalchemy import Column, Integer, String, ForeignKey
+
+fixture
+
+def test_is_database_create():
+    assert True
+
+def test_write_data_in_table():
+    ...
