@@ -14,9 +14,12 @@ def enable_foreign_keys(dbapi_connection, connection_record):
 
 TestBase = sessionmaker(bind=engine)
 Base = declarative_base()
-class Klasse(Base):
-    __tablename__ = "klassen"
+class Lehrer(Base):
+    __tablename__ = "lehrer"
 
-    klasse_id = Column(Integer, primary_key=True)
-    klassenname = Column(String, nullable=False)
+    lehrer_id = Column(Integer, primary_key=True)
+    vorname = Column(String, nullable=False)
+    nachname = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
+    passwort_hash = Column(String, nullable=False)
 Base.metadata.create_all(bind=engine)

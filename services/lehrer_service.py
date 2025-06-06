@@ -22,9 +22,9 @@ class LehrerService(LehrerBaseService):
         else:
             return 0
 
-    def register_user(self, vorname, nachname, email, password, session = SessionLocal()):
+    def register_user(self, vorname, nachname, email, password):
 
-        session
+        session = SessionLocal()
         neuer_lehrer = Lehrer(
             vorname=vorname,
             nachname=nachname,
