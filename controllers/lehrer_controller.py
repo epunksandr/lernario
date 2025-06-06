@@ -32,5 +32,7 @@ def register():
     success = lehrer_service.register_user(vorname, nachname, email, password)
     if success:
         return redirect(url_for('show_login_form'))
+    elif success == "FASLE":
+        return redirect(url_for("show_login_form"))
     else:
         return redirect(url_for("show_register"))
