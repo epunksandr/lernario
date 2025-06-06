@@ -37,4 +37,4 @@ class LehrerService(LehrerBaseService):
             session.close()
             return True
         except:
-            return "FASLE"
+            return True
