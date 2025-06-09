@@ -23,15 +23,17 @@ class LehrerService(LehrerBaseService):
             return 0
 
     def register_user(self, vorname, nachname, email, password):
-
-        session = SessionLocal()
-        neuer_lehrer = Lehrer(
-            vorname=vorname,
-            nachname=nachname,
-            email=email,
-            passwort=password
-        )
-        session.add(neuer_lehrer)
-        session.commit()
-        session.close()
-        return True
+        try: 
+            session = SessionLocal()
+            neuer_lehrer = Lehrer(
+                vorname=vorname,
+                nachname=nachname,
+                email=email,
+                passwort=password
+            )
+            session.add(neuer_lehrer)
+            session.commit()
+            session.close()
+            return True
+        except:
+            return Exception
