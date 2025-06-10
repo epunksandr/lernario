@@ -22,4 +22,5 @@ class Lehrer(Base):
     nachname = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
     passwort_hash = Column(String, nullable=False)
+
 Base.metadata.create_all(bind=engine)
